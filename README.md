@@ -34,7 +34,7 @@ To view this project locally, you can use any static file server. Since Python i
     ```bash
     python -m http.server 8000
     ```
-4.  Open your browser and visit `http://localhost:8000`.
+4.  Open your browser and visit `( https://perarivalan.vercel.app )`.
 
 ## Contact
 

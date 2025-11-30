@@ -60,6 +60,45 @@ ul {
     padding: 0 var(--spacing-md);
 }
 
+/* Keyframes */
+@keyframes gradient-flow {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
+@keyframes float {
+    0% {
+        transform: translateY(0px);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
+
+    100% {
+        transform: translateY(0px);
+    }
+}
+
+@keyframes shine {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
 /* Buttons */
 .btn {
     display: inline-block;
@@ -69,6 +108,8 @@ ul {
     cursor: pointer;
     transition: all 0.3s ease;
     letter-spacing: 0.5px;
+    position: relative;
+    overflow: hidden;
 }
 
 .btn-primary {
@@ -76,11 +117,29 @@ ul {
     color: #030712;
     box-shadow: 0 0 20px rgba(0, 240, 255, 0.3);
     border: none;
+    z-index: 1;
+}
+
+.btn-primary::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.4), transparent);
+    transition: 0.5s;
+    z-index: -1;
+}
+
+.btn-primary:hover::after {
+    left: 100%;
+    transition: 0.5s;
 }
 
 .btn-primary:hover {
     transform: translateY(-3px);
-    box-shadow: 0 0 30px rgba(0, 240, 255, 0.5);
+    box-shadow: 0 0 30px rgba(0, 240, 255, 0.6);
 }
 
 .btn-outline {
@@ -96,6 +155,7 @@ ul {
     background: rgba(0, 240, 255, 0.1);
     transform: translateY(-3px);
     color: var(--secondary-color);
+    box-shadow: 0 0 20px rgba(0, 240, 255, 0.2);
 }
 
 /* Navbar */
@@ -124,6 +184,8 @@ ul {
     background-clip: text;
     -webkit-text-fill-color: transparent;
     letter-spacing: -0.5px;
+    animation: gradient-flow 3s ease infinite;
+    background-size: 200% 200%;
 }
 
 .nav-links {
@@ -206,6 +268,7 @@ ul {
     border-radius: 2rem;
     font-size: 0.9rem;
     border: 1px solid rgba(0, 240, 255, 0.2);
+    animation: float 3s ease-in-out infinite;
 }
 
 .hero h1 {
@@ -241,11 +304,13 @@ ul {
     font-size: 2.2rem;
     font-weight: 700;
     margin-bottom: 2rem;
-    background: linear-gradient(to right, var(--primary-color), var(--secondary-color));
+    background: linear-gradient(to right, var(--primary-color), var(--secondary-color), var(--primary-color));
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
     filter: drop-shadow(0 0 10px rgba(0, 240, 255, 0.3));
+    background-size: 200% auto;
+    animation: gradient-flow 3s linear infinite;
 }
 
 .tagline {
@@ -306,6 +371,12 @@ ul {
     border-radius: 2rem;
     border: 1px solid var(--glass-border);
     box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.about-content:hover {
+    transform: translateY(-5px);
+    border-color: var(--primary-color);
 }
 
 .about-text p {
@@ -322,17 +393,35 @@ ul {
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 1rem;
     padding: 2rem;
-    transition: all 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
     height: 100%;
     display: flex;
     flex-direction: column;
+    position: relative;
+    overflow: hidden;
+}
+
+.glass-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.03), transparent);
+    transform: translateX(-100%);
+    transition: 0.5s;
+}
+
+.glass-card:hover::before {
+    transform: translateX(100%);
 }
 
 .glass-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px) scale(1.02);
     background: rgba(255, 255, 255, 0.05);
     border-color: var(--primary-color);
-    box-shadow: 0 10px 30px rgba(0, 240, 255, 0.1);
+    box-shadow: 0 15px 35px rgba(0, 240, 255, 0.15);
 }
 
 .glass-card i {
@@ -340,6 +429,12 @@ ul {
     width: 40px;
     height: 40px;
     margin-bottom: 1.5rem;
+    transition: transform 0.3s ease;
+}
+
+.glass-card:hover i {
+    transform: scale(1.1);
+    color: var(--secondary-color);
 }
 
 .glass-card h3 {
@@ -380,6 +475,11 @@ ul {
     font-size: 0.95rem;
     position: relative;
     padding-left: 1.2rem;
+    transition: color 0.3s ease;
+}
+
+.skill-list li:hover {
+    color: #fff;
 }
 
 .skill-list li::before {
@@ -403,16 +503,16 @@ ul {
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 1rem;
     overflow: hidden;
-    transition: all 0.3s ease;
+    transition: all 0.4s ease;
     display: flex;
     flex-direction: column;
     height: 100%;
 }
 
 .project-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-10px);
     border-color: var(--secondary-color);
-    box-shadow: 0 10px 30px rgba(10, 255, 96, 0.1);
+    box-shadow: 0 15px 35px rgba(10, 255, 96, 0.15);
 }
 
 .project-content {
@@ -449,6 +549,12 @@ ul {
     font-size: 0.85rem;
     font-weight: 500;
     border: 1px solid rgba(10, 255, 96, 0.2);
+    transition: all 0.3s ease;
+}
+
+.project-tags span:hover {
+    background: rgba(10, 255, 96, 0.2);
+    transform: scale(1.05);
 }
 
 .project-link {
@@ -458,10 +564,12 @@ ul {
     color: var(--text-color);
     font-weight: 600;
     margin-top: auto;
+    transition: all 0.3s ease;
 }
 
 .project-link:hover {
     color: var(--primary-color);
+    transform: translateX(5px);
 }
 
 /* Contact Section */
@@ -496,7 +604,7 @@ ul {
 .contact-item:hover {
     border-color: var(--primary-color);
     background: rgba(0, 240, 255, 0.05);
-    transform: translateY(-5px);
+    transform: translateY(-5px) scale(1.05);
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
@@ -519,13 +627,33 @@ ul {
 /* Animations */
 .reveal {
     opacity: 0;
-    transform: translateY(30px);
-    transition: all 1s cubic-bezier(0.5, 0, 0, 1);
+    transform: translateY(50px) scale(0.95);
+    transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
 }
 
 .reveal.active {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
+}
+
+.delay-100 {
+    transition-delay: 0.1s;
+}
+
+.delay-200 {
+    transition-delay: 0.2s;
+}
+
+.delay-300 {
+    transition-delay: 0.3s;
+}
+
+.delay-400 {
+    transition-delay: 0.4s;
+}
+
+.delay-500 {
+    transition-delay: 0.5s;
 }
 
 /* Responsive Design */

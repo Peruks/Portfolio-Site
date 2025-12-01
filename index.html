@@ -4,254 +4,295 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Perarivalan K | Portfolio</title>
-    <meta name="description" content="Portfolio of Perarivalan K - Aspiring AI/ML Engineer and Data Scientist">
+    <title>Perarivalan K | AI & Machine Learning Portfolio</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
 </head>
 
 <body>
+
+    <!-- Navbar -->
     <nav class="navbar">
-        <div class="container nav-container">
+        <div class="container nav-content">
             <a href="#" class="logo">Perarivalan K.</a>
-            <button class="mobile-menu-btn" aria-label="Toggle menu">
-                <i data-lucide="menu"></i>
-            </button>
-            <ul class="nav-links">
-                <li><a href="#home">Home</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#highlights">Highlights</a></li>
-                <li><a href="#skills">Skills</a></li>
-                <li><a href="#projects">Projects</a></li>
-                <li><a href="#contact">Contact</a></li>
-            </ul>
+            <div class="nav-links">
+                <a href="#about">About</a>
+                <a href="#why-data">Why Data & AI</a>
+                <a href="#value">Value</a>
+                <a href="#highlights">Highlights</a>
+                <a href="#skills">Skills</a>
+                <a href="#projects">Projects</a>
+                <a href="#contact">Contact</a>
+            </div>
         </div>
     </nav>
 
-    <main>
-        <section id="home" class="hero reveal">
-            <canvas id="hero-canvas"></canvas>
-            <div class="container hero-content">
-                <span class="greeting">Hello, I'm</span>
-                <h1>Perarivalan K</h1>
-                <p class="location"><i data-lucide="map-pin"></i> Chennai, India</p>
-                <h2 class="role">AI & Machine Learning Enthusiast</h2>
-                <p class="tagline">Transitioning into AI, Machine Learning, and Data Science with a focus on building
-                    practical solutions</p>
-                <div class="hero-btns">
-                    <a href="https://github.com/Peruks" target="_blank" class="btn btn-primary"><i
-                            data-lucide="github"></i> GitHub</a>
-                    <a href="https://www.linkedin.com/in/perarivalanks" target="_blank" class="btn btn-primary"><i
-                            data-lucide="linkedin"></i> LinkedIn</a>
-                    <a href="resume.pdf" download class="btn btn-outline"><i data-lucide="file-text"></i> Resume</a>
-                </div>
-            </div>
-        </section>
+    <!-- Hero Section -->
+    <section class="hero">
+        <canvas id="hero-canvas"></canvas>
+        <div class="hero-content">
+            <p class="greeting">Hello, I'm</p>
+            <h1>Perarivalan K</h1>
+            <p class="role">AI & Machine Learning Enthusiast</p>
+            <p class="tagline">Transitioning into AI, Machine Learning, and Data Science with a focus on building
+                practical solutions.</p>
 
-        <section id="about" class="section about reveal">
-            <div class="container">
-                <h2 class="section-title">About Me</h2>
-                <div class="about-content">
-                    <div class="about-text">
-                        <p>I am a passionate technology enthusiast transitioning into the world of <strong>Artificial
-                                Intelligence, Machine Learning, and Data Science</strong>. With a background as a
-                            Network Operations Engineer at UST Global, I have a strong foundation in technical systems
-                            and operations.</p>
-                        <p>Over the past few years, I dedicated myself to preparing for competitive exams, a journey
-                            that significantly sharpened my <strong>discipline, consistency, and analytical
-                                thinking</strong>. I also explored the Web3 ecosystem and actively engaged with tech
-                            communities to stay ahead of the curve.</p>
-                        <p>Currently, I am focused on building hands-on projects and enhancing my communication skills
-                            to prepare for impactful roles in the data and AI domain.</p>
+            <div class="btn-group">
+                <a href="https://github.com/Peruks" target="_blank" class="btn btn-primary">
+                    <i data-lucide="github"></i> GitHub
+                </a>
+                <a href="https://www.linkedin.com/in/perarivalanks" target="_blank" class="btn btn-primary">
+                    <i data-lucide="linkedin"></i> LinkedIn
+                </a>
+                <a href="resume.pdf" download class="btn btn-outline">
+                    <i data-lucide="file-text"></i> Resume
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="about" class="section">
+        <div class="container">
+            <h2 class="section-title">About Me</h2>
+            <div class="about-text">
+                <p>I’m a disciplined and curious learner who believes in improving a little every day. My career path
+                    wasn’t linear, but every phase built a different strength that now gives me a unique edge in the
+                    tech field.</p>
+                <p>My background has shaped a strong foundation:</p>
+                <div class="skill-pills">
+                    <span class="pill">TNPSC Preparation (Discipline & Focus)</span>
+                    <span class="pill">UST Global (Corporate Systems)</span>
+                    <span class="pill">Tech Exploration (AI, Data, Web3)</span>
+                </div>
+                <p style="margin-top: 2rem;">Today, I’m not exploring different paths anymore — I have complete clarity.
+                    Data & AI is the field I want to grow in, and I’m fully committed to this direction.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Why Data & AI -->
+    <section id="why-data" class="section">
+        <div class="container">
+            <h2 class="section-title">Why Data & AI?</h2>
+            <div class="about-text">
+                <p>I chose Data & AI because it aligns with who I am — logical, analytical, and focused on improvement.
+                    This field rewards skill over background and consistency over credentials. It combines everything I
+                    enjoy: finding patterns, analyzing information, solving problems, and learning continuously. It’s a
+                    career path where effort directly converts into growth, and that’s exactly what motivates me.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Value Proposition -->
+    <section id="value" class="section">
+        <div class="container">
+            <h2 class="section-title">The Value Proposition</h2>
+            <div class="value-list">
+                <div class="value-item">
+                    <i data-lucide="check-circle" class="value-icon"></i>
+                    <div class="value-content">
+                        <h3>Unwavering Clarity</h3>
+                        <p>I’m not testing the waters. I’ve made a mature, informed decision to build my career in this
+                            field and I am committed long-term.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="highlights" class="section highlights reveal">
-            <div class="container">
-                <h2 class="section-title">Highlights</h2>
-                <div class="highlights-grid">
-                    <div class="glass-card reveal delay-100">
-                        <i data-lucide="code"></i>
-                        <h3>Technical Foundation</h3>
-                        <p>Network Operations Engineer at UST Global with hands-on experience in system operations and
-                            technical problem-solving</p>
-                    </div>
-                    <div class="glass-card reveal delay-200">
-                        <i data-lucide="users"></i>
-                        <h3>Community Engagement</h3>
-                        <p>Active exploration of the Web3 ecosystem and engagement with tech communities, staying
-                            current with emerging technologies</p>
-                    </div>
-                    <div class="glass-card reveal delay-300">
-                        <i data-lucide="trending-up"></i>
-                        <h3>Disciplined Learning</h3>
-                        <p>Developed strong analytical thinking and consistency through focused preparation, now
-                            applying these skills to AI and ML</p>
-                    </div>
-                    <div class="glass-card reveal delay-400">
-                        <i data-lucide="briefcase"></i>
-                        <h3>Current Focus</h3>
-                        <p>Building practical projects in AI and Machine Learning while continuously improving technical
-                            communication skills</p>
+                <div class="value-item">
+                    <i data-lucide="clock" class="value-icon"></i>
+                    <div class="value-content">
+                        <h3>Proven Discipline</h3>
+                        <p>Years of 8–10 hours/day focused preparation taught me consistency, time management, and deep
+                            concentration.</p>
                     </div>
                 </div>
-            </div>
-        </section>
-
-        <section id="skills" class="section skills reveal">
-            <div class="container">
-                <h2 class="section-title">Skills & Expertise</h2>
-                <div class="skills-grid">
-                    <div class="glass-card reveal delay-100">
-                        <i data-lucide="brain"></i>
-                        <h3>AI & Machine Learning</h3>
-                        <ul class="skill-list">
-                            <li>Machine Learning</li>
-                            <li>Deep Learning (Beginner)</li>
-                            <li>Data Analysis</li>
-                            <li>Python</li>
-                        </ul>
+                <div class="value-item">
+                    <i data-lucide="server" class="value-icon"></i>
+                    <div class="value-content">
+                        <h3>Technical Maturity</h3>
+                        <p>I already understand systems, networks, and troubleshooting from my corporate experience at
+                            UST Global — I am not starting from zero.</p>
                     </div>
-                    <div class="glass-card reveal delay-200">
-                        <i data-lucide="database"></i>
-                        <h3>Data & Databases</h3>
-                        <ul class="skill-list">
-                            <li>SQL</li>
-                            <li>Data Analysis</li>
-                            <li>Data Visualization</li>
-                        </ul>
+                </div>
+                <div class="value-item">
+                    <i data-lucide="book-open" class="value-icon"></i>
+                    <div class="value-content">
+                        <h3>Independent Learner</h3>
+                        <p>I know how to research, troubleshoot, understand documentation, and upgrade myself without
+                            constant hand-holding.</p>
                     </div>
-                    <div class="glass-card reveal delay-300">
-                        <i data-lucide="code-2"></i>
-                        <h3>Development</h3>
-                        <ul class="skill-list">
-                            <li>Python</li>
-                            <li>React (Beginner)</li>
-                            <li>Web Development</li>
-                        </ul>
-                    </div>
-                    <div class="glass-card reveal delay-400">
-                        <i data-lucide="lightbulb"></i>
-                        <h3>Problem Solving</h3>
-                        <ul class="skill-list">
-                            <li>Analytical Thinking</li>
-                            <li>Algorithm Design</li>
-                            <li>System Design</li>
-                        </ul>
-                    </div>
-                    <div class="glass-card reveal delay-500">
-                        <i data-lucide="bar-chart-2"></i>
-                        <h3>Technical Skills</h3>
-                        <ul class="skill-list">
-                            <li>Network Operations</li>
-                            <li>System Administration</li>
-                            <li>Troubleshooting</li>
-                        </ul>
-                    </div>
-                    <div class="glass-card reveal delay-500">
-                        <i data-lucide="message-square"></i>
-                        <h3>Soft Skills</h3>
-                        <ul class="skill-list">
-                            <li>Communication</li>
-                            <li>Team Collaboration</li>
-                            <li>Continuous Learning</li>
-                        </ul>
+                </div>
+                <div class="value-item">
+                    <i data-lucide="flame" class="value-icon"></i>
+                    <div class="value-content">
+                        <h3>The Hunger Factor</h3>
+                        <p>I’m restarting my career with a clear purpose. I have something to prove — and that drive
+                            shows in my effort, consistency, and mindset.</p>
                     </div>
                 </div>
             </div>
-        </section>
+            <div class="value-quote">
+                “Fresh graduates bring energy. I bring energy + discipline + maturity + commitment.”
+            </div>
+        </div>
+    </section>
 
-        <section id="projects" class="section projects reveal">
-            <div class="container">
-                <h2 class="section-title">Featured Projects</h2>
-                <div class="projects-grid">
-                    <!-- Project 1 -->
-                    <article class="project-card reveal delay-100">
-                        <div class="project-content">
-                            <h3>Machine Learning Classification Model</h3>
-                            <p class="project-desc">Built a classification model to predict outcomes using scikit-learn.
-                                Implemented data preprocessing, feature engineering, and model evaluation with
-                                cross-validation techniques.</p>
-                            <div class="project-tags">
-                                <span>Python</span>
-                                <span>Machine Learning</span>
-                                <span>scikit-learn</span>
-                                <span>Pandas</span>
-                            </div>
-                            <a href="https://github.com/Peruks" target="_blank" class="project-link">View Code <i
-                                    data-lucide="external-link"></i></a>
-                        </div>
-                    </article>
-
-                    <!-- Project 2 -->
-                    <article class="project-card reveal delay-200">
-                        <div class="project-content">
-                            <h3>Data Analytics Dashboard</h3>
-                            <p class="project-desc">Created an interactive dashboard for data visualization and
-                                analysis. Enables users to explore datasets with dynamic charts and filtering
-                                capabilities.</p>
-                            <div class="project-tags">
-                                <span>Python</span>
-                                <span>Data Analysis</span>
-                                <span>Visualization</span>
-                                <span>SQL</span>
-                            </div>
-                            <a href="https://github.com/Peruks" target="_blank" class="project-link">View Code <i
-                                    data-lucide="external-link"></i></a>
-                        </div>
-                    </article>
-
-                    <!-- Project 3 -->
-                    <article class="project-card reveal delay-300">
-                        <div class="project-content">
-                            <h3>SQL Data Processing Pipeline</h3>
-                            <p class="project-desc">Developed a data processing pipeline to clean, transform, and
-                                analyze large datasets. Automated ETL processes for efficient data handling and
-                                reporting.</p>
-                            <div class="project-tags">
-                                <span>SQL</span>
-                                <span>Data Processing</span>
-                                <span>Python</span>
-                                <span>ETL</span>
-                            </div>
-                            <a href="https://github.com/Peruks" target="_blank" class="project-link">View Code <i
-                                    data-lucide="external-link"></i></a>
-                        </div>
-                    </article>
+    <!-- Highlights -->
+    <section id="highlights" class="section">
+        <div class="container">
+            <h2 class="section-title">Highlights</h2>
+            <div class="grid-4">
+                <div class="card">
+                    <i data-lucide="code" size="32"></i>
+                    <h3>Technical Foundation</h3>
+                    <p>Network Operations Engineer at UST Global with hands-on experience in system operations and
+                        technical problem-solving</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="users" size="32"></i>
+                    <h3>Community Engagement</h3>
+                    <p>Active exploration of the Web3 ecosystem and engagement with tech communities, staying current
+                        with emerging technologies</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="trending-up" size="32"></i>
+                    <h3>Disciplined Learning</h3>
+                    <p>Developed strong analytical thinking and consistency through focused preparation, now applying
+                        these skills to AI and ML</p>
+                </div>
+                <div class="card">
+                    <i data-lucide="briefcase" size="32"></i>
+                    <h3>Current Focus</h3>
+                    <p>Building practical projects in AI and Machine Learning while continuously improving technical
+                        communication skills</p>
                 </div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <section id="contact" class="section contact reveal">
-            <div class="container">
-                <h2 class="section-title">Get In Touch</h2>
-                <p class="contact-intro">I'm currently open to opportunities in AI and Data Science. Feel free to reach
-                    out!</p>
-
-                <div class="contact-links">
-                    <a href="mailto:ks.perarivalan@gmail.com" class="contact-item">
-                        <i data-lucide="mail"></i>
-                        <span>ks.perarivalan@gmail.com</span>
-                    </a>
-                    <a href="https://www.linkedin.com/in/perarivalanks" target="_blank" class="contact-item">
-                        <i data-lucide="linkedin"></i>
-                        <span>LinkedIn</span>
-                    </a>
-                    <a href="https://github.com/Peruks" target="_blank" class="contact-item">
-                        <i data-lucide="github"></i>
-                        <span>GitHub</span>
-                    </a>
+    <!-- Skills -->
+    <section id="skills" class="section">
+        <div class="container">
+            <h2 class="section-title">Skills & Expertise</h2>
+            <div class="skills-grid">
+                <div class="card skill-card">
+                    <h3><i data-lucide="brain"></i> AI & Machine Learning</h3>
+                    <ul class="skill-list">
+                        <li>Machine Learning</li>
+                        <li>Deep Learning (Beginner)</li>
+                        <li>Data Analysis</li>
+                        <li>Python</li>
+                    </ul>
+                </div>
+                <div class="card skill-card">
+                    <h3><i data-lucide="database"></i> Data & Databases</h3>
+                    <ul class="skill-list">
+                        <li>SQL</li>
+                        <li>Data Analysis</li>
+                        <li>Data Visualization</li>
+                    </ul>
+                </div>
+                <div class="card skill-card">
+                    <h3><i data-lucide="code-2"></i> Development</h3>
+                    <ul class="skill-list">
+                        <li>Python</li>
+                        <li>React (Beginner)</li>
+                        <li>Web Development</li>
+                    </ul>
+                </div>
+                <div class="card skill-card">
+                    <h3><i data-lucide="lightbulb"></i> Problem Solving</h3>
+                    <ul class="skill-list">
+                        <li>Analytical Thinking</li>
+                        <li>Algorithm Design</li>
+                        <li>System Design</li>
+                    </ul>
                 </div>
             </div>
-        </section>
-    </main>
+        </div>
+    </section>
 
-    <footer class="footer">
+    <!-- Projects -->
+    <section id="projects" class="section">
+        <div class="container">
+            <h2 class="section-title">Upcoming Projects</h2>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Machine Learning Classification Model</h3>
+                    <a href="https://github.com/Peruks" target="_blank" class="btn btn-outline"
+                        style="padding: 0.5rem 1rem; font-size: 0.9rem;">View Code</a>
+                </div>
+                <p style="color: var(--text-secondary);">Built a classification model to predict outcomes using
+                    scikit-learn. Implemented data preprocessing, feature engineering, and model evaluation with
+                    cross-validation techniques.</p>
+                <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Machine Learning</span>
+                    <span class="tag">scikit-learn</span>
+                    <span class="tag">Pandas</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>Data Analytics Dashboard</h3>
+                    <a href="https://github.com/Peruks" target="_blank" class="btn btn-outline"
+                        style="padding: 0.5rem 1rem; font-size: 0.9rem;">View Code</a>
+                </div>
+                <p style="color: var(--text-secondary);">Created an interactive dashboard for data visualization and
+                    analysis. Enables users to explore datasets with dynamic charts and filtering capabilities.</p>
+                <div class="project-tags">
+                    <span class="tag">Python</span>
+                    <span class="tag">Data Analysis</span>
+                    <span class="tag">Visualization</span>
+                    <span class="tag">SQL</span>
+                </div>
+            </div>
+
+            <div class="project-card">
+                <div class="project-header">
+                    <h3>SQL Data Processing Pipeline</h3>
+                    <a href="https://github.com/Peruks" target="_blank" class="btn btn-outline"
+                        style="padding: 0.5rem 1rem; font-size: 0.9rem;">View Code</a>
+                </div>
+                <p style="color: var(--text-secondary);">Developed a data processing pipeline to clean, transform, and
+                    analyze large datasets. Automated ETL processes for efficient data handling and reporting.</p>
+                <div class="project-tags">
+                    <span class="tag">SQL</span>
+                    <span class="tag">Data Processing</span>
+                    <span class="tag">Python</span>
+                    <span class="tag">ETL</span>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <div class="contact-links">
+                <a href="mailto:ks.perarivalan@gmail.com" class="contact-item">
+                    <i data-lucide="mail"></i>
+                    <span>ks.perarivalan@gmail.com</span>
+                </a>
+                <a href="https://www.linkedin.com/in/perarivalanks" target="_blank" class="contact-item">
+                    <i data-lucide="linkedin"></i>
+                    <span>LinkedIn</span>
+                </a>
+                <a href="https://github.com/Peruks" target="_blank" class="contact-item">
+                    <i data-lucide="github"></i>
+                    <span>GitHub</span>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <footer>
         <div class="container">
             <p>&copy; 2025 Perarivalan K. All rights reserved.</p>
         </div>

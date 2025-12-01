@@ -1,9 +1,10 @@
-// Neural Network Animation
+// Neural Network Animation (Advanced Interactive Version)
 const canvas = document.getElementById('hero-canvas');
 const ctx = canvas.getContext('2d');
 
 let width, height;
 let particles = [];
+let mouse = { x: null, y: null, radius: 150 };
 
 // Resize Canvas
 function resize() {
@@ -14,17 +15,50 @@ function resize() {
     initParticles();
 }
 
+// Track Mouse Position
+window.addEventListener('mousemove', (event) => {
+    mouse.x = event.x;
+    mouse.y = event.y;
+});
+
+window.addEventListener('mouseout', () => {
+    mouse.x = null;
+    mouse.y = null;
+});
+
 // Particle Class
 class Particle {
     constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.5; // Slow movement
-        this.vy = (Math.random() - 0.5) * 0.5;
+        this.vx = (Math.random() - 0.5) * 0.8; // Slightly faster
+        this.vy = (Math.random() - 0.5) * 0.8;
         this.size = Math.random() * 2 + 1;
+        this.baseX = this.x;
+        this.baseY = this.y;
+        this.density = (Math.random() * 30) + 1;
     }
 
     update() {
+        // Mouse Interaction (Repulsion)
+        if (mouse.x != null) {
+            let dx = mouse.x - this.x;
+            let dy = mouse.y - this.y;
+            let distance = Math.sqrt(dx * dx + dy * dy);
+            let forceDirectionX = dx / distance;
+            let forceDirectionY = dy / distance;
+            let maxDistance = mouse.radius;
+            let force = (maxDistance - distance) / maxDistance;
+            let directionX = forceDirectionX * force * this.density;
+            let directionY = forceDirectionY * force * this.density;
+
+            if (distance < mouse.radius) {
+                this.x -= directionX;
+                this.y -= directionY;
+            }
+        }
+
+        // Normal Movement
         this.x += this.vx;
         this.y += this.vy;
 
@@ -34,7 +68,7 @@ class Particle {
     }
 
     draw() {
-        ctx.fillStyle = 'rgba(0, 240, 255, 0.5)'; // Cyan
+        ctx.fillStyle = 'rgba(34, 211, 238, 0.7)'; // Cyan
         ctx.beginPath();
         ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
         ctx.fill();
@@ -44,7 +78,7 @@ class Particle {
 // Initialize Particles
 function initParticles() {
     particles = [];
-    const particleCount = Math.floor(width / 15); // Density based on width
+    const particleCount = Math.floor(width / 10); // Higher density
     for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
     }
@@ -59,16 +93,18 @@ function animate() {
         particles[i].update();
         particles[i].draw();
 
-        // Connect Particles (Neural Network Effect)
+        // Connect Particles
         for (let j = i; j < particles.length; j++) {
             const dx = particles[i].x - particles[j].x;
             const dy = particles[i].y - particles[j].y;
             const distance = Math.sqrt(dx * dx + dy * dy);
 
-            if (distance < 150) {
+            if (distance < 120) {
                 ctx.beginPath();
-                ctx.strokeStyle = `rgba(124, 58, 237, ${0.15 - distance / 1000})`; // Violet connections
-                ctx.lineWidth = 0.5;
+                // Dynamic opacity based on distance
+                let opacity = 1 - (distance / 120);
+                ctx.strokeStyle = `rgba(167, 139, 250, ${opacity * 0.4})`; // Violet connections
+                ctx.lineWidth = 0.8;
                 ctx.moveTo(particles[i].x, particles[i].y);
                 ctx.lineTo(particles[j].x, particles[j].y);
                 ctx.stroke();
@@ -107,4 +143,4 @@ window.addEventListener('resize', resize);
 resize();
 animate();
 
-console.log('Neural Network Animation Loaded');
+console.log('Advanced Interactive Animation Loaded');

@@ -1,129 +1,94 @@
+/* 
+   ========================================
+   PREMIUM DARK THEME - PORTFOLIO
+   ========================================
+*/
+
 :root {
-    /* Premium Dark Palette */
-    --bg-dark: #030712;
-    /* Deep Navy/Black */
-    --bg-card: rgba(255, 255, 255, 0.03);
-    /* Glassmorphism Base */
+    --bg-dark: #020617;
+    /* slate-950 (Darker than before) */
+    --bg-card: rgba(15, 23, 42, 0.7);
+    /* slate-900 with opacity */
     --text-primary: #f8fafc;
-    /* Off-white */
-    --text-secondary: #94a3b8;
-    /* Muted Blue-Grey */
-    --accent-cyan: #00f0ff;
-    /* Neon Cyan */
-    --accent-violet: #7c3aed;
-    /* Deep Violet */
-    --accent-glow: rgba(0, 240, 255, 0.5);
-    --border-glass: rgba(255, 255, 255, 0.08);
-
-    /* Spacing & Layout */
-    --container-width: 1200px;
-    --section-spacing: 6rem;
-    --border-radius: 16px;
-
-    /* Typography */
-    --font-main: 'Inter', system-ui, -apple-system, sans-serif;
+    /* slate-50 */
+    --text-secondary: #cbd5e1;
+    /* slate-300 */
+    --accent-cyan: #22d3ee;
+    /* cyan-400 */
+    --accent-violet: #a78bfa;
+    /* violet-400 */
+    --border-glass: rgba(255, 255, 255, 0.1);
+    --border-radius: 12px;
 }
 
-/* Reset & Base */
 * {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-
-html {
-    scroll-behavior: smooth;
+    font-family: 'Inter', sans-serif;
 }
 
 body {
-    font-family: var(--font-main);
     background-color: var(--bg-dark);
     color: var(--text-primary);
     line-height: 1.6;
     overflow-x: hidden;
-    position: relative;
-}
-
-/* Animated Background */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-        radial-gradient(circle at 15% 50%, rgba(124, 58, 237, 0.15), transparent 40%),
-        radial-gradient(circle at 85% 30%, rgba(0, 240, 255, 0.15), transparent 40%);
-    z-index: -1;
-    animation: backgroundPulse 10s ease-in-out infinite alternate;
-}
-
-@keyframes backgroundPulse {
-    0% {
-        opacity: 0.5;
-        transform: scale(1);
-    }
-
-    100% {
-        opacity: 0.8;
-        transform: scale(1.1);
-    }
 }
 
 a {
     text-decoration: none;
     color: inherit;
-    transition: 0.3s ease;
+    transition: color 0.3s ease;
 }
 
 ul {
     list-style: none;
 }
 
-/* Layout Utilities */
-.container {
-    max-width: var(--container-width);
-    margin: 0 auto;
-    padding: 0 2rem;
+/* Premium Text Selection */
+::selection {
+    background: var(--accent-cyan);
+    color: #020617;
 }
 
-.section {
-    padding: var(--section-spacing) 0;
+/* Global Highlight for Bold Text */
+strong,
+b {
+    color: var(--accent-cyan);
+    font-weight: 600;
+}
+
+/* Container */
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 2rem;
 }
 
 /* Typography */
 h1,
 h2,
 h3 {
-    letter-spacing: -0.02em;
+    font-weight: 700;
+    line-height: 1.2;
 }
 
 .section-title {
     font-size: 3rem;
-    font-weight: 800;
     text-align: center;
     margin-bottom: 4rem;
-    background: linear-gradient(135deg, #fff 0%, var(--text-secondary) 100%);
+    background: linear-gradient(to right, var(--accent-cyan), var(--accent-violet), var(--accent-cyan));
+    background-size: 200% auto;
     -webkit-background-clip: text;
     background-clip: text;
     -webkit-text-fill-color: transparent;
-    position: relative;
-    display: inline-block;
-    left: 50%;
-    transform: translateX(-50%);
+    animation: shimmer 3s linear infinite;
 }
 
-.section-title::after {
-    content: '';
-    position: absolute;
-    bottom: -10px;
-    left: 50%;
-    transform: translateX(-50%);
-    width: 60px;
-    height: 4px;
-    background: linear-gradient(to right, var(--accent-cyan), var(--accent-violet));
-    border-radius: 2px;
+@keyframes shimmer {
+    to {
+        background-position: 200% center;
+    }
 }
 
 /* Navbar */
@@ -131,11 +96,12 @@ h3 {
     position: fixed;
     top: 0;
     width: 100%;
-    padding: 1.2rem 0;
-    background: rgba(3, 7, 18, 0.85);
-    backdrop-filter: blur(12px);
-    border-bottom: 1px solid var(--border-glass);
+    background: rgba(2, 6, 23, 0.8);
+    /* Darker navbar */
+    backdrop-filter: blur(10px);
     z-index: 1000;
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-glass);
 }
 
 .nav-content {
@@ -146,7 +112,7 @@ h3 {
 
 .logo {
     font-size: 1.5rem;
-    font-weight: 800;
+    font-weight: 700;
     background: linear-gradient(to right, var(--accent-cyan), var(--accent-violet));
     -webkit-background-clip: text;
     background-clip: text;
@@ -279,10 +245,16 @@ h3 {
     background: rgba(0, 240, 255, 0.05);
 }
 
+/* Section General */
+.section {
+    padding: 6rem 0;
+}
+
 /* About Section */
 .about-text p {
     font-size: 1.1rem;
-    line-height: 1.8;
+    line-height: 1.9;
+    /* Increased line-height for readability */
     color: var(--text-secondary);
     margin-bottom: 2rem;
     max-width: 800px;
@@ -291,44 +263,36 @@ h3 {
     text-align: center;
 }
 
-.skill-pills {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 1rem;
-    justify-content: center;
-    margin-top: 2rem;
+.about-list-container {
+    max-width: 800px;
+    margin: 0 auto;
+    text-align: left;
 }
 
-.pill {
-    background: rgba(255, 255, 255, 0.05);
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    font-size: 0.9rem;
-    border: 1px solid var(--border-glass);
+.about-list {
+    margin: 2rem 0;
+}
+
+.about-list li {
+    margin-bottom: 1.5rem;
+    color: var(--text-secondary);
+    font-size: 1.05rem;
+    line-height: 1.6;
+    padding-left: 1.5rem;
+    position: relative;
+}
+
+.about-list li::before {
+    content: '•';
     color: var(--accent-cyan);
+    position: absolute;
+    left: 0;
+    font-weight: bold;
 }
 
-/* Glassmorphism Cards */
-.card,
-.value-item,
-.project-card,
-.skill-card {
-    background: var(--bg-card);
-    backdrop-filter: blur(12px);
-    border: 1px solid var(--border-glass);
-    border-radius: var(--border-radius);
-    padding: 2rem;
-    transition: all 0.4s ease;
-    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
-}
-
-.card:hover,
-.value-item:hover,
-.project-card:hover,
-.skill-card:hover {
-    transform: translateY(-5px);
-    border-color: rgba(0, 240, 255, 0.3);
-    box-shadow: 0 10px 40px -10px rgba(0, 240, 255, 0.15);
+.about-list strong {
+    /* Inherits global strong color */
+    font-weight: 600;
 }
 
 /* Value Proposition */
@@ -342,6 +306,18 @@ h3 {
     display: flex;
     gap: 1.5rem;
     align-items: flex-start;
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    transition: all 0.3s ease;
+}
+
+.value-item:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 10px 25px -5px rgba(0, 240, 255, 0.2);
 }
 
 .value-icon {
@@ -361,27 +337,91 @@ h3 {
     font-size: 0.95rem;
 }
 
+/* Value Quote Styled (Animated & Highlighted) */
 .value-quote {
     text-align: center;
-    font-size: 1.4rem;
+    font-size: 1.35rem;
+    /* Slightly larger for impact */
     font-weight: 600;
-    color: var(--accent-cyan);
-    margin-top: 4rem;
+
+    /* Gradient Text */
+    background: linear-gradient(to right, var(--accent-cyan), #fff, var(--accent-violet));
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    color: transparent;
+
+    margin-top: 3rem;
     font-style: italic;
-    opacity: 0.8;
+    background-color: rgba(22, 78, 99, 0.1);
+    /* Keep background subtle */
+    border-left: 4px solid var(--accent-cyan);
+    padding: 1rem 2rem;
+    border-radius: 0 8px 8px 0;
+    max-width: 900px;
+    margin-left: auto;
+    margin-right: auto;
+    transition: all 0.3s ease;
+    animation: border-pulse 3s infinite;
 }
 
-/* Highlights Grid */
-.grid-4 {
+@keyframes border-pulse {
+    0% {
+        border-color: var(--accent-cyan);
+        box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.4);
+    }
+
+    50% {
+        border-color: var(--accent-violet);
+        box-shadow: 0 0 20px 0 rgba(167, 139, 250, 0.4);
+    }
+
+    100% {
+        border-color: var(--accent-cyan);
+        box-shadow: 0 0 0 0 rgba(34, 211, 238, 0.4);
+    }
+}
+
+/* Highlights & Skills Grid (Compact Vertical Box Style) */
+/* Strict 2-column grid with max-width to prevent stretching */
+.grid-4,
+.skills-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
+    max-width: 900px;
+    margin: 0 auto;
 }
 
-.card h3 {
+/* Cards (Highlights, Skills, Projects) */
+.card,
+.project-card,
+.skill-card {
+    background: var(--bg-card);
+    backdrop-filter: blur(12px);
+    border: 1px solid var(--border-glass);
+    border-radius: var(--border-radius);
+    padding: 2rem;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+}
+
+.card:hover,
+.project-card:hover,
+.skill-card:hover {
+    transform: translateY(-8px);
+    border-color: var(--accent-cyan);
+    box-shadow: 0 10px 25px -5px rgba(0, 240, 255, 0.2);
+}
+
+.card h3,
+.skill-card h3 {
     margin: 1rem 0;
     color: var(--text-primary);
     font-size: 1.2rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem;
 }
 
 .card i {
@@ -395,23 +435,7 @@ h3 {
     font-size: 0.95rem;
 }
 
-/* Skills Grid (Strict 2 Columns) */
-.skills-grid {
-    display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 2rem;
-    max-width: 1000px;
-    margin: 0 auto;
-}
-
-.skill-card h3 {
-    display: flex;
-    align-items: center;
-    gap: 0.8rem;
-    margin-bottom: 1.5rem;
-    color: var(--accent-cyan);
-}
-
+/* Skill List */
 .skill-list li {
     margin-bottom: 0.8rem;
     display: flex;
@@ -442,6 +466,8 @@ h3 {
 .project-header h3 {
     font-size: 1.4rem;
     color: var(--text-primary);
+    margin: 0;
+    /* Reset margin for header context */
 }
 
 .project-tags {
@@ -506,14 +532,14 @@ footer {
         font-size: 3rem;
     }
 
-    .nav-links {
-        display: none;
-        /* Simple hide for now, can add mobile menu later */
-    }
-
+    .grid-4,
     .skills-grid {
         grid-template-columns: 1fr;
         /* Stack on mobile */
+    }
+
+    .nav-links {
+        display: none;
     }
 
     .project-header {

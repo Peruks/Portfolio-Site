@@ -21,15 +21,19 @@
                         },
                         violet: {
                             400: '#a78bfa',
+                            500: '#8b5cf6',
                         }
                     },
                     fontFamily: {
                         sans: ['Inter', 'sans-serif'],
+                        heading: ['Outfit', 'sans-serif'],
                     },
                     animation: {
                         'shimmer': 'shimmer 3s linear infinite',
                         'pulse-border': 'border-pulse 3s infinite',
                         'blink': 'blink 1s step-end infinite',
+                        'blob': 'blob 7s infinite',
+                        'float': 'float 6s ease-in-out infinite',
                     },
                     keyframes: {
                         shimmer: {
@@ -50,6 +54,16 @@
                         blink: {
                             '0%, 100%': { borderColor: 'transparent' },
                             '50%': { borderColor: '#22d3ee' }
+                        },
+                        blob: {
+                            '0%': { transform: 'translate(0px, 0px) scale(1)' },
+                            '33%': { transform: 'translate(30px, -50px) scale(1.1)' },
+                            '66%': { transform: 'translate(-20px, 20px) scale(0.9)' },
+                            '100%': { transform: 'translate(0px, 0px) scale(1)' },
+                        },
+                        float: {
+                            '0%, 100%': { transform: 'translateY(0)' },
+                            '50%': { transform: 'translateY(-20px)' },
                         }
                     }
                 }
@@ -58,15 +72,26 @@
     </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700&family=Outfit:wght@500;700;800&display=swap"
+        rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
     <style>
         body {
             font-family: 'Inter', sans-serif;
-            background-image: radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.05) 0%, transparent 50%);
+            background-color: #020617;
         }
 
-        /* Custom Utilities for things Tailwind handles differently */
+        h1,
+        h2,
+        h3,
+        h4,
+        h5,
+        h6 {
+            font-family: 'Outfit', sans-serif;
+        }
+
+        /* Custom Utilities */
         .text-gradient {
             background: linear-gradient(to right, #22d3ee, #a78bfa, #22d3ee);
             background-size: 200% auto;
@@ -74,24 +99,117 @@
             background-clip: text;
             -webkit-text-fill-color: transparent;
             animation: shimmer 3s linear infinite;
+            filter: drop-shadow(0 0 10px rgba(34, 211, 238, 0.3));
+            /* Added Glow */
         }
 
         .glass-card {
-            background: rgba(30, 41, 59, 0.6);
-            backdrop-filter: blur(16px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+            background: rgba(15, 23, 42, 0.6);
+            backdrop-filter: blur(12px);
+            border: 1px solid rgba(34, 211, 238, 0.1);
+            /* Subtle Cyan Border */
+            box-shadow: 0 0 15px rgba(34, 211, 238, 0.05);
+            /* Subtle Permanent Glow */
+            position: relative;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+        }
+
+        /* Spotlight Effect */
+        .glass-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: radial-gradient(800px circle at var(--mouse-x) var(--mouse-y),
+                    rgba(34, 211, 238, 0.15),
+                    transparent 40%);
+            opacity: 0;
+            transition: opacity 0.5s;
+            pointer-events: none;
+            z-index: 1;
+        }
+
+        .glass-card:hover::before {
+            opacity: 1;
+        }
+
+        .glass-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 0 25px rgba(34, 211, 238, 0.2);
+            /* Stronger Glow on Hover */
+            border-color: rgba(34, 211, 238, 0.4);
+        }
+
+        /* Text Highlight Utility */
+        .highlight {
+            color: #22d3ee;
+            font-weight: 600;
+            text-shadow: 0 0 10px rgba(34, 211, 238, 0.4);
+        }
+
+        /* Scroll Reveal Animation */
+        .reveal {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.8s cubic-bezier(0.5, 0, 0, 1);
+        }
+
+        .reveal.active {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        /* Staggered delays for children */
+        .stagger-1 {
+            transition-delay: 100ms;
+        }
+
+        .stagger-2 {
+            transition-delay: 200ms;
+        }
+
+        .stagger-3 {
+            transition-delay: 300ms;
+        }
+
+        .stagger-4 {
+            transition-delay: 400ms;
+        }
+
+        /* Animation Delays */
+        .animation-delay-2000 {
+            animation-delay: 2s;
+        }
+
+        .animation-delay-4000 {
+            animation-delay: 4s;
         }
     </style>
 </head>
 
-<body class="bg-slate-950 text-slate-50 antialiased overflow-x-hidden selection:bg-cyan-400 selection:text-slate-950">
+<body
+    class="bg-slate-950 text-slate-50 antialiased overflow-x-hidden selection:bg-cyan-400 selection:text-slate-950 relative">
+
+    <!-- Aurora Background -->
+    <div class="fixed inset-0 w-full h-full overflow-hidden -z-10 pointer-events-none">
+        <div class="absolute top-[-10%] left-[-10%] w-96 h-96 bg-cyan-500/20 rounded-full blur-[100px] animate-blob">
+        </div>
+        <div
+            class="absolute top-[20%] right-[-10%] w-96 h-96 bg-violet-500/20 rounded-full blur-[100px] animate-blob animation-delay-2000">
+        </div>
+        <div
+            class="absolute bottom-[-10%] left-[20%] w-96 h-96 bg-blue-500/20 rounded-full blur-[100px] animate-blob animation-delay-4000">
+        </div>
+    </div>
 
     <!-- Navbar -->
-    <nav class="fixed top-0 w-full bg-slate-950/80 backdrop-blur-md z-50 border-b border-white/10 py-4">
+    <nav class="fixed top-0 w-full bg-slate-950/70 backdrop-blur-md z-50 border-b border-white/5 py-4">
         <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
             <a href="#"
-                class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">Perarivalan
+                class="text-2xl font-bold font-heading bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent drop-shadow-[0_0_15px_rgba(34,211,238,0.5)]">Perarivalan
                 K.</a>
             <div class="hidden md:flex gap-8">
                 <a href="#about" class="text-slate-300 hover:text-cyan-400 font-medium transition-colors">About</a>
@@ -109,18 +227,20 @@
     </nav>
 
     <!-- Hero Section -->
-    <section class="relative min-h-screen flex flex-col items-center justify-center text-center pt-20 overflow-hidden">
+    <section
+        class="relative min-h-screen flex flex-col items-center justify-center text-center pt-20 overflow-hidden reveal">
         <canvas id="hero-canvas" class="absolute top-0 left-0 w-full h-full z-0 opacity-60"></canvas>
 
         <div class="relative z-10 max-w-3xl px-4">
-            <p class="text-cyan-400 font-semibold tracking-widest uppercase mb-4">Hello, I'm</p>
+            <p class="text-cyan-400 font-semibold tracking-widest uppercase mb-4 animate-float">Hello, I'm</p>
             <h1
-                class="text-6xl md:text-7xl font-extrabold leading-tight mb-4 bg-gradient-to-r from-white to-cyan-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,240,255,0.2)]">
+                class="text-6xl md:text-8xl font-extrabold leading-tight mb-4 bg-gradient-to-r from-white via-cyan-200 to-cyan-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,240,255,0.2)] font-heading">
                 Perarivalan K
             </h1>
             <p class="text-2xl md:text-3xl text-slate-300 font-light mb-6">AI & Machine Learning Enthusiast</p>
             <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
-                Transitioning into AI, Machine Learning, and Data Science with a focus on building practical solutions.
+                Transitioning into <span class="highlight">AI</span>, <span class="highlight">Machine Learning</span>,
+                and <span class="highlight">Data Science</span> with a focus on building practical solutions.
             </p>
 
             <div class="flex flex-wrap justify-center gap-4">
@@ -141,9 +261,9 @@
     </section>
 
     <!-- About Section -->
-    <section id="about" class="py-24">
+    <section id="about" class="py-24 reveal">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient">About Me</h2>
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient font-heading">About Me</h2>
 
             <div class="max-w-3xl mx-auto text-left">
                 <p class="text-lg text-slate-300 leading-relaxed mb-8">
@@ -155,8 +275,9 @@
                 <ul class="space-y-6 mb-8">
                     <li class="relative pl-6 text-slate-300 text-lg leading-relaxed">
                         <span class="absolute left-0 text-cyan-400 font-bold">•</span>
-                        <strong class="text-cyan-400 font-semibold">TNPSC Preparation:</strong> Instilled an elite level
-                        of discipline, patience, and focus—I know how to work hard for long hours without supervision.
+                        <strong class="text-cyan-400 font-semibold">TNPSC Preparation:</strong> Cleared Group 1 Prelims
+                        3 times. This rigorous process instilled an elite level of discipline, patience, and focus—I
+                        know how to work hard for long hours without supervision.
                     </li>
                     <li class="relative pl-6 text-slate-300 text-lg leading-relaxed">
                         <span class="absolute left-0 text-cyan-400 font-bold">•</span>
@@ -171,17 +292,17 @@
                 </ul>
 
                 <p class="text-lg font-semibold text-cyan-400 mt-8">
-                    The Bottom Line: I am done exploring. I have absolute clarity that Data & AI is my future, and I am
-                    fully committed to it.
+                    The Bottom Line: I am done exploring. I have absolute clarity that <span class="highlight">Data &
+                        AI</span> is my future, and I am fully committed to it.
                 </p>
             </div>
         </div>
     </section>
 
     <!-- Why Data & AI -->
-    <section id="why-data" class="py-24 bg-slate-900/30">
+    <section id="why-data" class="py-24 bg-slate-900/30 reveal">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient">Why Data & AI?</h2>
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient font-heading">Why Data & AI?</h2>
 
             <div class="max-w-3xl mx-auto text-center space-y-6">
                 <p class="text-lg text-slate-300 leading-relaxed">
@@ -189,9 +310,11 @@
                     refining.
                 </p>
                 <p class="text-lg text-slate-300 leading-relaxed">
-                    My strength lies in logical reasoning and mathematical analysis, which are the foundations of this
+                    My strength lies in <span class="highlight">logical reasoning</span> and <span
+                        class="highlight">mathematical analysis</span>, which are the foundations of this
                     field. Additionally, my background in teaching mathematics has trained me to break down complex
-                    problems and explain insights clearly—a crucial skill for any Data Analyst.
+                    problems and explain insights clearly—a crucial skill for any <span class="highlight">Data
+                        Analyst</span>.
                 </p>
                 <p class="text-lg text-slate-300 leading-relaxed">
                     I already possess the discipline, the logic, and the adaptability. I am now channeling these
@@ -202,14 +325,14 @@
     </section>
 
     <!-- Education & Certifications -->
-    <section id="education" class="py-24">
+    <section id="education" class="py-24 reveal">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient">Education & Certifications</h2>
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient font-heading">Education &
+                Certifications</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                 <!-- Item 1 -->
-                <div
-                    class="glass-card p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 shadow-lg hover:shadow-cyan-500/10 hover:border-cyan-400/50">
+                <div class="glass-card p-8 rounded-xl reveal stagger-1">
                     <div class="flex items-center gap-3 mb-4">
                         <i data-lucide="award" class="text-cyan-400 w-8 h-8"></i>
                         <h3 class="text-xl font-bold text-slate-50">AI Programmer Program</h3>
@@ -219,8 +342,7 @@
                 </div>
 
                 <!-- Item 2 -->
-                <div
-                    class="glass-card p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 shadow-lg hover:shadow-cyan-500/10 hover:border-cyan-400/50">
+                <div class="glass-card p-8 rounded-xl reveal stagger-2">
                     <div class="flex items-center gap-3 mb-4">
                         <i data-lucide="database" class="text-cyan-400 w-8 h-8"></i>
                         <h3 class="text-xl font-bold text-slate-50">SQL for Data Science</h3>
@@ -231,8 +353,7 @@
                 </div>
 
                 <!-- Item 3 -->
-                <div
-                    class="glass-card p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 shadow-lg hover:shadow-cyan-500/10 hover:border-cyan-400/50">
+                <div class="glass-card p-8 rounded-xl reveal stagger-3">
                     <div class="flex items-center gap-3 mb-4">
                         <i data-lucide="code-2" class="text-cyan-400 w-8 h-8"></i>
                         <h3 class="text-xl font-bold text-slate-50">Python for Data Science & AI</h3>
@@ -243,8 +364,7 @@
                 </div>
 
                 <!-- Item 4 -->
-                <div
-                    class="glass-card p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 shadow-lg hover:shadow-cyan-500/10 hover:border-cyan-400/50">
+                <div class="glass-card p-8 rounded-xl reveal stagger-1">
                     <div class="flex items-center gap-3 mb-4">
                         <i data-lucide="terminal" class="text-cyan-400 w-8 h-8"></i>
                         <h3 class="text-xl font-bold text-slate-50">Crash Course on Python</h3>
@@ -254,8 +374,7 @@
                 </div>
 
                 <!-- Item 5 -->
-                <div
-                    class="glass-card p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 shadow-lg hover:shadow-cyan-500/10 hover:border-cyan-400/50 md:col-span-2 lg:col-span-1">
+                <div class="glass-card p-8 rounded-xl reveal stagger-2 md:col-span-2 lg:col-span-1">
                     <div class="flex items-center gap-3 mb-4">
                         <i data-lucide="graduation-cap" class="text-cyan-400 w-8 h-8"></i>
                         <h3 class="text-xl font-bold text-slate-50">B.E. ECE</h3>
@@ -268,14 +387,14 @@
     </section>
 
     <!-- Value Proposition -->
-    <section id="value" class="py-24 bg-slate-900/30">
+    <section id="value" class="py-24 bg-slate-900/30 reveal">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient">The Value Proposition</h2>
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient font-heading">The Value
+                Proposition</h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                 <!-- Value Item 1 -->
-                <div
-                    class="glass-card p-8 rounded-xl transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 flex gap-4 items-start">
+                <div class="glass-card p-8 rounded-xl flex gap-4 items-start reveal stagger-1">
                     <i data-lucide="check-circle" class="text-cyan-400 w-6 h-6 mt-1 shrink-0"></i>
                     <div>
                         <h3 class="text-xl font-bold text-slate-50 mb-2">Unwavering Clarity</h3>
@@ -285,8 +404,7 @@
                 </div>
 
                 <!-- Value Item 2 -->
-                <div
-                    class="glass-card p-8 rounded-xl transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 flex gap-4 items-start">
+                <div class="glass-card p-8 rounded-xl flex gap-4 items-start reveal stagger-2">
                     <i data-lucide="clock" class="text-cyan-400 w-6 h-6 mt-1 shrink-0"></i>
                     <div>
                         <h3 class="text-xl font-bold text-slate-50 mb-2">Proven Discipline</h3>
@@ -296,8 +414,7 @@
                 </div>
 
                 <!-- Value Item 3 -->
-                <div
-                    class="glass-card p-8 rounded-xl transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 flex gap-4 items-start">
+                <div class="glass-card p-8 rounded-xl flex gap-4 items-start reveal stagger-3">
                     <i data-lucide="server" class="text-cyan-400 w-6 h-6 mt-1 shrink-0"></i>
                     <div>
                         <h3 class="text-xl font-bold text-slate-50 mb-2">Technical Maturity</h3>
@@ -307,8 +424,7 @@
                 </div>
 
                 <!-- Value Item 4 -->
-                <div
-                    class="glass-card p-8 rounded-xl transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 flex gap-4 items-start">
+                <div class="glass-card p-8 rounded-xl flex gap-4 items-start reveal stagger-1">
                     <i data-lucide="book-open" class="text-cyan-400 w-6 h-6 mt-1 shrink-0"></i>
                     <div>
                         <h3 class="text-xl font-bold text-slate-50 mb-2">Independent Learner</h3>
@@ -319,7 +435,7 @@
 
                 <!-- Value Item 5 -->
                 <div
-                    class="glass-card p-8 rounded-xl transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 flex gap-4 items-start md:col-span-2 lg:col-span-1">
+                    class="glass-card p-8 rounded-xl flex gap-4 items-start reveal stagger-2 md:col-span-2 lg:col-span-1">
                     <i data-lucide="flame" class="text-cyan-400 w-6 h-6 mt-1 shrink-0"></i>
                     <div>
                         <h3 class="text-xl font-bold text-slate-50 mb-2">The Hunger Factor</h3>
@@ -331,7 +447,7 @@
 
             <!-- Mic Drop Quote (Animated) -->
             <div
-                class="max-w-4xl mx-auto mt-16 p-6 border-l-4 border-cyan-500 bg-cyan-900/10 rounded-r-lg shadow-lg animate-pulse-border">
+                class="max-w-4xl mx-auto mt-16 p-6 border-l-4 border-cyan-500 bg-cyan-900/10 rounded-r-lg shadow-lg animate-pulse-border reveal">
                 <div class="flex justify-center">
                     <p id="quote-text"
                         class="text-lg md:text-xl italic text-gray-300 text-center inline-block min-h-[1.5em]">
@@ -343,13 +459,14 @@
     </section>
 
     <!-- Skills -->
-    <section id="skills" class="py-24">
+    <section id="skills" class="py-24 reveal">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient">Skills & Expertise</h2>
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient font-heading">Skills & Expertise
+            </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
                 <!-- Category 1: Languages & Logic -->
-                <div class="glass-card p-6 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                <div class="glass-card p-6 rounded-xl reveal stagger-1">
                     <h3 class="text-lg font-bold text-slate-50 mb-4 flex items-center gap-2">
                         <i data-lucide="code" class="text-cyan-400 w-5 h-5"></i> Languages & Logic
                     </h3>
@@ -365,7 +482,7 @@
                 </div>
 
                 <!-- Category 2: Data Libraries -->
-                <div class="glass-card p-6 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                <div class="glass-card p-6 rounded-xl reveal stagger-2">
                     <h3 class="text-lg font-bold text-slate-50 mb-4 flex items-center gap-2">
                         <i data-lucide="database" class="text-cyan-400 w-5 h-5"></i> Data Libraries
                     </h3>
@@ -382,7 +499,7 @@
                 </div>
 
                 <!-- Category 3: Tools & Workflow -->
-                <div class="glass-card p-6 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                <div class="glass-card p-6 rounded-xl reveal stagger-3">
                     <h3 class="text-lg font-bold text-slate-50 mb-4 flex items-center gap-2">
                         <i data-lucide="wrench" class="text-cyan-400 w-5 h-5"></i> Tools & Workflow
                     </h3>
@@ -399,7 +516,7 @@
                 </div>
 
                 <!-- Category 4: Professional Skills -->
-                <div class="glass-card p-6 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                <div class="glass-card p-6 rounded-xl reveal stagger-4">
                     <h3 class="text-lg font-bold text-slate-50 mb-4 flex items-center gap-2">
                         <i data-lucide="briefcase" class="text-cyan-400 w-5 h-5"></i> Professional Skills
                     </h3>
@@ -419,13 +536,14 @@
     </section>
 
     <!-- Projects -->
-    <section id="projects" class="py-24 bg-slate-900/30">
+    <section id="projects" class="py-24 bg-slate-900/30 reveal">
         <div class="max-w-7xl mx-auto px-6">
-            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient">Upcoming Projects</h2>
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient font-heading">Upcoming Projects
+            </h2>
 
             <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
                 <!-- Project 1 -->
-                <div class="glass-card p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                <div class="glass-card p-8 rounded-xl reveal stagger-1">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-bold text-slate-50">ML Classification Model</h3>
                         <a href="https://github.com/Peruks" target="_blank"
@@ -447,7 +565,7 @@
                 </div>
 
                 <!-- Project 2 -->
-                <div class="glass-card p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                <div class="glass-card p-8 rounded-xl reveal stagger-2">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-bold text-slate-50">Data Analytics Dashboard</h3>
                         <a href="https://github.com/Peruks" target="_blank"
@@ -470,7 +588,7 @@
                 </div>
 
                 <!-- Project 3 -->
-                <div class="glass-card p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                <div class="glass-card p-8 rounded-xl reveal stagger-3">
                     <div class="flex justify-between items-start mb-4">
                         <h3 class="text-xl font-bold text-slate-50">SQL Data Pipeline</h3>
                         <a href="https://github.com/Peruks" target="_blank"
@@ -495,9 +613,9 @@
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="py-24">
+    <section id="contact" class="py-24 reveal">
         <div class="max-w-7xl mx-auto px-6 text-center">
-            <h2 class="text-4xl md:text-5xl font-bold mb-16 text-gradient">Get In Touch</h2>
+            <h2 class="text-4xl md:text-5xl font-bold mb-16 text-gradient font-heading">Get In Touch</h2>
             <div class="flex flex-wrap justify-center gap-12">
                 <a href="mailto:ks.perarivalan@gmail.com"
                     class="flex flex-col items-center gap-4 text-slate-400 hover:text-cyan-400 transition-colors group">

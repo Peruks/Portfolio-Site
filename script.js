@@ -131,7 +131,7 @@ const observer = new IntersectionObserver((entries) => {
     });
 }, observerOptions);
 
-document.querySelectorAll('.section, .card, .value-item, .project-card').forEach(el => {
+document.querySelectorAll('.section, .glass-card, .project-card').forEach(el => {
     el.style.opacity = "0";
     el.style.transform = "translateY(20px)";
     el.style.transition = "opacity 0.6s ease-out, transform 0.6s ease-out";
@@ -144,3 +144,30 @@ resize();
 animate();
 
 console.log('Advanced Interactive Animation Loaded');
+
+// Typewriter Effect
+const quoteText = "“Fresh graduates bring energy. I bring energy + discipline + maturity + commitment.”";
+const quoteElement = document.getElementById('quote-text');
+let hasTyped = false;
+
+function typeWriter(text, i) {
+    if (i < text.length) {
+        quoteElement.innerHTML = text.substring(0, i + 1) + '<span class="animate-blink border-r-2 border-cyan-400 ml-1">&nbsp;</span>';
+        setTimeout(() => typeWriter(text, i + 1), 50);
+    } else {
+        quoteElement.innerHTML = text + '<span class="animate-blink border-r-2 border-cyan-400 ml-1">&nbsp;</span>';
+    }
+}
+
+const quoteObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting && !hasTyped) {
+            hasTyped = true;
+            typeWriter(quoteText, 0);
+        }
+    });
+}, { threshold: 0.5 });
+
+if (quoteElement) {
+    quoteObserver.observe(quoteElement);
+}

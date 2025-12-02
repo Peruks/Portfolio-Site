@@ -1,226 +1,417 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" class="scroll-smooth">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Perarivalan K | AI & Machine Learning Portfolio</title>
-    <link rel="stylesheet" href="main.css">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        slate: {
+                            950: '#020617', // Custom dark background
+                        },
+                        cyan: {
+                            400: '#22d3ee',
+                            500: '#06b6d4',
+                            900: '#164e63',
+                        },
+                        violet: {
+                            400: '#a78bfa',
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                    animation: {
+                        'shimmer': 'shimmer 3s linear infinite',
+                        'pulse-border': 'border-pulse 3s infinite',
+                        'blink': 'blink 1s step-end infinite',
+                    },
+                    keyframes: {
+                        shimmer: {
+                            'to': {
+                                backgroundPosition: '200% center'
+                            },
+                        },
+                        'border-pulse': {
+                            '0%, 100%': {
+                                borderColor: '#22d3ee',
+                                boxShadow: '0 0 0 0 rgba(34, 211, 238, 0.4)'
+                            },
+                            '50%': {
+                                borderColor: '#a78bfa',
+                                boxShadow: '0 0 20px 0 rgba(167, 139, 250, 0.4)'
+                            },
+                        },
+                        blink: {
+                            '0%, 100%': { borderColor: 'transparent' },
+                            '50%': { borderColor: '#22d3ee' }
+                        }
+                    }
+                }
+            }
+        }
+    </script>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600;700;800&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+            background-image: radial-gradient(circle at 50% 0%, rgba(34, 211, 238, 0.05) 0%, transparent 50%);
+        }
+
+        /* Custom Utilities for things Tailwind handles differently */
+        .text-gradient {
+            background: linear-gradient(to right, #22d3ee, #a78bfa, #22d3ee);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+
+        .glass-card {
+            background: rgba(30, 41, 59, 0.6);
+            backdrop-filter: blur(16px);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+        }
+    </style>
 </head>
 
-<body>
+<body class="bg-slate-950 text-slate-50 antialiased overflow-x-hidden selection:bg-cyan-400 selection:text-slate-950">
 
     <!-- Navbar -->
-    <nav class="navbar">
-        <div class="container nav-content">
-            <a href="#" class="logo">Perarivalan K.</a>
-            <div class="nav-links">
-                <a href="#about">About</a>
-                <a href="#why-data">Why Data & AI</a>
-                <a href="#value">Value</a>
-                <a href="#highlights">Highlights</a>
-                <a href="#skills">Skills</a>
-                <a href="#projects">Projects</a>
-                <a href="#contact">Contact</a>
+    <nav class="fixed top-0 w-full bg-slate-950/80 backdrop-blur-md z-50 border-b border-white/10 py-4">
+        <div class="max-w-7xl mx-auto px-6 flex justify-between items-center">
+            <a href="#"
+                class="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-violet-400 bg-clip-text text-transparent">Perarivalan
+                K.</a>
+            <div class="hidden md:flex gap-8">
+                <a href="#about" class="text-slate-300 hover:text-cyan-400 font-medium transition-colors">About</a>
+                <a href="#why-data" class="text-slate-300 hover:text-cyan-400 font-medium transition-colors">Why Data &
+                    AI</a>
+                <a href="#education"
+                    class="text-slate-300 hover:text-cyan-400 font-medium transition-colors">Education</a>
+                <a href="#value" class="text-slate-300 hover:text-cyan-400 font-medium transition-colors">Value</a>
+                <a href="#skills" class="text-slate-300 hover:text-cyan-400 font-medium transition-colors">Skills</a>
+                <a href="#projects"
+                    class="text-slate-300 hover:text-cyan-400 font-medium transition-colors">Projects</a>
+                <a href="#contact" class="text-slate-300 hover:text-cyan-400 font-medium transition-colors">Contact</a>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section class="hero">
-        <canvas id="hero-canvas"></canvas>
-        <div class="hero-content">
-            <p class="greeting">Hello, I'm</p>
-            <h1>Perarivalan K</h1>
-            <p class="role">AI & Machine Learning Enthusiast</p>
-            <p class="tagline">Transitioning into AI, Machine Learning, and Data Science with a focus on building
-                practical solutions.</p>
+    <section class="relative min-h-screen flex flex-col items-center justify-center text-center pt-20 overflow-hidden">
+        <canvas id="hero-canvas" class="absolute top-0 left-0 w-full h-full z-0 opacity-60"></canvas>
 
-            <div class="btn-group">
-                <a href="https://github.com/Peruks" target="_blank" class="btn btn-primary">
-                    <i data-lucide="github"></i> GitHub
+        <div class="relative z-10 max-w-3xl px-4">
+            <p class="text-cyan-400 font-semibold tracking-widest uppercase mb-4">Hello, I'm</p>
+            <h1
+                class="text-6xl md:text-7xl font-extrabold leading-tight mb-4 bg-gradient-to-r from-white to-cyan-400 bg-clip-text text-transparent drop-shadow-[0_0_30px_rgba(0,240,255,0.2)]">
+                Perarivalan K
+            </h1>
+            <p class="text-2xl md:text-3xl text-slate-300 font-light mb-6">AI & Machine Learning Enthusiast</p>
+            <p class="text-lg text-slate-400 max-w-2xl mx-auto mb-12 leading-relaxed">
+                Transitioning into AI, Machine Learning, and Data Science with a focus on building practical solutions.
+            </p>
+
+            <div class="flex flex-wrap justify-center gap-4">
+                <a href="https://github.com/Peruks" target="_blank"
+                    class="flex items-center gap-2 px-6 py-3 rounded-full font-semibold bg-gradient-to-br from-cyan-400 to-violet-400 text-black shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(124,58,237,0.5)] transition-all duration-300">
+                    <i data-lucide="github" class="w-5 h-5"></i> GitHub
                 </a>
-                <a href="https://www.linkedin.com/in/perarivalanks" target="_blank" class="btn btn-primary">
-                    <i data-lucide="linkedin"></i> LinkedIn
+                <a href="https://www.linkedin.com/in/perarivalanks" target="_blank"
+                    class="flex items-center gap-2 px-6 py-3 rounded-full font-semibold bg-gradient-to-br from-cyan-400 to-violet-400 text-black shadow-[0_0_20px_rgba(0,240,255,0.3)] hover:-translate-y-1 hover:shadow-[0_0_30px_rgba(124,58,237,0.5)] transition-all duration-300">
+                    <i data-lucide="linkedin" class="w-5 h-5"></i> LinkedIn
                 </a>
-                <a href="resume.pdf" download class="btn btn-outline">
-                    <i data-lucide="file-text"></i> Resume
+                <a href="resume.pdf" download
+                    class="flex items-center gap-2 px-6 py-3 rounded-full font-semibold border border-white/10 text-slate-50 hover:border-cyan-400 hover:bg-cyan-400/5 transition-all duration-300">
+                    <i data-lucide="file-text" class="w-5 h-5"></i> Resume
                 </a>
             </div>
         </div>
     </section>
 
     <!-- About Section -->
-    <section id="about" class="section">
-        <div class="container">
-            <h2 class="section-title">About Me</h2>
-            <div class="about-text">
-                <p>I am a tech enthusiast who believes in consistent improvement and rapid adaptation. My career path
+    <section id="about" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient">About Me</h2>
+
+            <div class="max-w-3xl mx-auto text-left">
+                <p class="text-lg text-slate-300 leading-relaxed mb-8">
+                    I am a tech enthusiast who believes in consistent improvement and rapid adaptation. My career path
                     hasn’t been a straight line, but every stop has added a unique tool to my arsenal, giving me a
-                    maturity that most freshers haven't developed yet.</p>
+                    maturity that most freshers haven't developed yet.
+                </p>
 
-                <div class="about-list-container">
-                    <ul class="about-list">
-                        <li>
-                            <strong>TNPSC Preparation:</strong> Instilled an elite level of discipline, patience, and
-                            focus—I know how to work hard for long hours without supervision.
-                        </li>
-                        <li>
-                            <strong>UST Global:</strong> Provided a strong technical foundation in networking and the
-                            confidence to handle live operational responsibilities.
-                        </li>
-                        <li>
-                            <strong>Tech Exploration:</strong> My deep dive into AI, Data, and Web3 proved that I thrive
-                            on hands-on problem solving and learning modern tools.
-                        </li>
-                    </ul>
-                </div>
+                <ul class="space-y-6 mb-8">
+                    <li class="relative pl-6 text-slate-300 text-lg leading-relaxed">
+                        <span class="absolute left-0 text-cyan-400 font-bold">•</span>
+                        <strong class="text-cyan-400 font-semibold">TNPSC Preparation:</strong> Instilled an elite level
+                        of discipline, patience, and focus—I know how to work hard for long hours without supervision.
+                    </li>
+                    <li class="relative pl-6 text-slate-300 text-lg leading-relaxed">
+                        <span class="absolute left-0 text-cyan-400 font-bold">•</span>
+                        <strong class="text-cyan-400 font-semibold">UST Global:</strong> Provided a strong technical
+                        foundation in networking and the confidence to handle live operational responsibilities.
+                    </li>
+                    <li class="relative pl-6 text-slate-300 text-lg leading-relaxed">
+                        <span class="absolute left-0 text-cyan-400 font-bold">•</span>
+                        <strong class="text-cyan-400 font-semibold">Tech Exploration:</strong> My deep dive into AI,
+                        Data, and Web3 proved that I thrive on hands-on problem solving and learning modern tools.
+                    </li>
+                </ul>
 
-                <p style="margin-top: 2rem; font-weight: 600; color: var(--accent-cyan);">The Bottom Line: I am done
-                    exploring. I have absolute clarity that Data & AI is my future, and I am fully committed to it.</p>
+                <p class="text-lg font-semibold text-cyan-400 mt-8">
+                    The Bottom Line: I am done exploring. I have absolute clarity that Data & AI is my future, and I am
+                    fully committed to it.
+                </p>
             </div>
         </div>
     </section>
 
     <!-- Why Data & AI -->
-    <section id="why-data" class="section">
-        <div class="container">
-            <h2 class="section-title">Why Data & AI?</h2>
-            <div class="about-text">
-                <p>I chose this field because it is evidence-based and growth-oriented.</p>
-                <p>I’ve always been driven by logic. When I analyzed my strengths, I realized that my natural ability to
-                    spot patterns and solve problems aligns perfectly with Data Science. This is a field that rewards
-                    skill over pedigree and consistency over credentials. It allows me to combine my analytical mindset
-                    with my hunger to learn, offering a career path where I can build real value for the long term.</p>
+    <section id="why-data" class="py-24 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient">Why Data & AI?</h2>
+
+            <div class="max-w-3xl mx-auto text-center space-y-6">
+                <p class="text-lg text-slate-300 leading-relaxed">
+                    I didn’t choose this field randomly; it is the perfect match for the skills I have spent years
+                    refining.
+                </p>
+                <p class="text-lg text-slate-300 leading-relaxed">
+                    My strength lies in logical reasoning and mathematical analysis, which are the foundations of this
+                    field. Additionally, my background in teaching mathematics has trained me to break down complex
+                    problems and explain insights clearly—a crucial skill for any Data Analyst.
+                </p>
+                <p class="text-lg text-slate-300 leading-relaxed">
+                    I already possess the discipline, the logic, and the adaptability. I am now channeling these
+                    strengths into mastering the technical stack to build a long-term career in Data & AI.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Education & Certifications -->
+    <section id="education" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient">Education & Certifications</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <!-- Item 1 -->
+                <div
+                    class="glass-card p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 shadow-lg hover:shadow-cyan-500/10 hover:border-cyan-400/50">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i data-lucide="award" class="text-cyan-400 w-8 h-8"></i>
+                        <h3 class="text-xl font-bold text-slate-50">AI Programmer Program</h3>
+                    </div>
+                    <p class="text-cyan-400 text-sm font-semibold mb-2">Cultus Education (Enrolled Dec 2025)</p>
+                    <p class="text-slate-400">Advanced training in Generative AI, Machine Learning, and NLP.</p>
+                </div>
+
+                <!-- Item 2 -->
+                <div
+                    class="glass-card p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 shadow-lg hover:shadow-cyan-500/10 hover:border-cyan-400/50">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i data-lucide="database" class="text-cyan-400 w-8 h-8"></i>
+                        <h3 class="text-xl font-bold text-slate-50">SQL for Data Science</h3>
+                    </div>
+                    <p class="text-cyan-400 text-sm font-semibold mb-2">University of California, Davis (Nov 2025)</p>
+                    <p class="text-slate-400">Mastered SQL fundamentals for analyzing data and running complex queries.
+                    </p>
+                </div>
+
+                <!-- Item 3 -->
+                <div
+                    class="glass-card p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 shadow-lg hover:shadow-cyan-500/10 hover:border-cyan-400/50">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i data-lucide="code-2" class="text-cyan-400 w-8 h-8"></i>
+                        <h3 class="text-xl font-bold text-slate-50">Python for Data Science & AI</h3>
+                    </div>
+                    <p class="text-cyan-400 text-sm font-semibold mb-2">IBM (Nov 2025)</p>
+                    <p class="text-slate-400">Gained proficiency in Python specifically for Data Science and AI
+                        development contexts.</p>
+                </div>
+
+                <!-- Item 4 -->
+                <div
+                    class="glass-card p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 shadow-lg hover:shadow-cyan-500/10 hover:border-cyan-400/50">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i data-lucide="terminal" class="text-cyan-400 w-8 h-8"></i>
+                        <h3 class="text-xl font-bold text-slate-50">Crash Course on Python</h3>
+                    </div>
+                    <p class="text-cyan-400 text-sm font-semibold mb-2">Google (Nov 2025)</p>
+                    <p class="text-slate-400">Completed rigorous training in Python automation and scripting.</p>
+                </div>
+
+                <!-- Item 5 -->
+                <div
+                    class="glass-card p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300 shadow-lg hover:shadow-cyan-500/10 hover:border-cyan-400/50 md:col-span-2 lg:col-span-1">
+                    <div class="flex items-center gap-3 mb-4">
+                        <i data-lucide="graduation-cap" class="text-cyan-400 w-8 h-8"></i>
+                        <h3 class="text-xl font-bold text-slate-50">B.E. ECE</h3>
+                    </div>
+                    <p class="text-cyan-400 text-sm font-semibold mb-2">Appollo Engineering College</p>
+                    <p class="text-slate-400">Graduated with a strong foundation in logic, circuits, and systems.</p>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- Value Proposition -->
-    <section id="value" class="section">
-        <div class="container">
-            <h2 class="section-title">The Value Proposition</h2>
-            <div class="value-list">
-                <div class="value-item">
-                    <i data-lucide="check-circle" class="value-icon"></i>
-                    <div class="value-content">
-                        <h3>Unwavering Clarity</h3>
-                        <p>I’m not testing the waters. I’ve made a mature, informed decision to build my career in this
-                            field and I am committed long-term.</p>
-                    </div>
-                </div>
-                <div class="value-item">
-                    <i data-lucide="clock" class="value-icon"></i>
-                    <div class="value-content">
-                        <h3>Proven Discipline</h3>
-                        <p>Years of studying 8–10 hours a day for competitive exams have trained me to stay focused and
-                            consistent, even when the work gets tough.</p>
-                    </div>
-                </div>
-                <div class="value-item">
-                    <i data-lucide="server" class="value-icon"></i>
-                    <div class="value-content">
-                        <h3>Technical Maturity</h3>
-                        <p>Unlike a complete beginner, I have corporate experience (UST Global) and understand how
-                            enterprise systems and networks operate.</p>
-                    </div>
-                </div>
-                <div class="value-item">
-                    <i data-lucide="book-open" class="value-icon"></i>
-                    <div class="value-content">
-                        <h3>Independent Learner</h3>
-                        <p>I don’t need constant hand-holding. I know how to research documentation, troubleshoot
-                            errors, and teach myself new technologies effectively.</p>
-                    </div>
-                </div>
-                <div class="value-item">
-                    <i data-lucide="flame" class="value-icon"></i>
-                    <div class="value-content">
-                        <h3>The Hunger Factor</h3>
-                        <p>I’m restarting my career with a clear purpose. That drive translates into higher dedication,
-                            better reliability, and a refusal to settle for average.</p>
-                    </div>
-                </div>
-            </div>
-            <div class="value-quote">
-                “Fresh graduates bring energy. I bring energy + discipline + maturity + commitment.”
-            </div>
-        </div>
-    </section>
+    <section id="value" class="py-24 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient">The Value Proposition</h2>
 
-    <!-- Highlights -->
-    <section id="highlights" class="section">
-        <div class="container">
-            <h2 class="section-title">Highlights</h2>
-            <div class="grid-4">
-                <div class="card">
-                    <i data-lucide="code"></i>
-                    <h3>Technical Foundation</h3>
-                    <p>Network Operations Engineer at UST Global with hands-on experience in system operations and
-                        technical problem-solving</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <!-- Value Item 1 -->
+                <div
+                    class="glass-card p-8 rounded-xl transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 flex gap-4 items-start">
+                    <i data-lucide="check-circle" class="text-cyan-400 w-6 h-6 mt-1 shrink-0"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-50 mb-2">Unwavering Clarity</h3>
+                        <p class="text-slate-400">I’m not testing the waters. I’ve made a mature, informed decision to
+                            build my career in this field and I am committed long-term.</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <i data-lucide="users"></i>
-                    <h3>Community Engagement</h3>
-                    <p>Active exploration of the Web3 ecosystem and engagement with tech communities, staying current
-                        with emerging technologies</p>
+
+                <!-- Value Item 2 -->
+                <div
+                    class="glass-card p-8 rounded-xl transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 flex gap-4 items-start">
+                    <i data-lucide="clock" class="text-cyan-400 w-6 h-6 mt-1 shrink-0"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-50 mb-2">Proven Discipline</h3>
+                        <p class="text-slate-400">Years of studying 8–10 hours a day for competitive exams have trained
+                            me to stay focused and consistent, even when the work gets tough.</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <i data-lucide="trending-up"></i>
-                    <h3>Disciplined Learning</h3>
-                    <p>Developed strong analytical thinking and consistency through focused preparation, now applying
-                        these skills to AI and ML</p>
+
+                <!-- Value Item 3 -->
+                <div
+                    class="glass-card p-8 rounded-xl transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 flex gap-4 items-start">
+                    <i data-lucide="server" class="text-cyan-400 w-6 h-6 mt-1 shrink-0"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-50 mb-2">Technical Maturity</h3>
+                        <p class="text-slate-400">Unlike a complete beginner, I have corporate experience (UST Global)
+                            and understand how enterprise systems and networks operate.</p>
+                    </div>
                 </div>
-                <div class="card">
-                    <i data-lucide="briefcase"></i>
-                    <h3>Current Focus</h3>
-                    <p>Building practical projects in AI and Machine Learning while continuously improving technical
-                        communication skills</p>
+
+                <!-- Value Item 4 -->
+                <div
+                    class="glass-card p-8 rounded-xl transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 flex gap-4 items-start">
+                    <i data-lucide="book-open" class="text-cyan-400 w-6 h-6 mt-1 shrink-0"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-50 mb-2">Independent Learner</h3>
+                        <p class="text-slate-400">I don’t need constant hand-holding. I know how to research
+                            documentation, troubleshoot errors, and teach myself new technologies effectively.</p>
+                    </div>
+                </div>
+
+                <!-- Value Item 5 -->
+                <div
+                    class="glass-card p-8 rounded-xl transition-all duration-300 hover:-translate-y-2 hover:border-cyan-400 hover:shadow-lg hover:shadow-cyan-500/20 flex gap-4 items-start md:col-span-2 lg:col-span-1">
+                    <i data-lucide="flame" class="text-cyan-400 w-6 h-6 mt-1 shrink-0"></i>
+                    <div>
+                        <h3 class="text-xl font-bold text-slate-50 mb-2">The Hunger Factor</h3>
+                        <p class="text-slate-400">I’m restarting my career with a clear purpose. That drive translates
+                            into higher dedication, better reliability, and a refusal to settle for average.</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mic Drop Quote (Animated) -->
+            <div
+                class="max-w-4xl mx-auto mt-16 p-6 border-l-4 border-cyan-500 bg-cyan-900/10 rounded-r-lg shadow-lg animate-pulse-border">
+                <div class="flex justify-center">
+                    <p id="quote-text"
+                        class="text-lg md:text-xl italic text-gray-300 text-center inline-block min-h-[1.5em]">
+                        <!-- Text injected by JS -->
+                    </p>
                 </div>
             </div>
         </div>
     </section>
 
     <!-- Skills -->
-    <section id="skills" class="section">
-        <div class="container">
-            <h2 class="section-title">Skills & Expertise</h2>
-            <div class="skills-grid">
-                <div class="card skill-card">
-                    <h3><i data-lucide="brain"></i> AI & Machine Learning</h3>
-                    <ul class="skill-list">
-                        <li>Machine Learning</li>
-                        <li>Deep Learning (Beginner)</li>
-                        <li>Data Analysis</li>
-                        <li>Python</li>
+    <section id="skills" class="py-24">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient">Skills & Expertise</h2>
+
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6 max-w-7xl mx-auto">
+                <!-- Category 1: Languages & Logic -->
+                <div class="glass-card p-6 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-lg font-bold text-slate-50 mb-4 flex items-center gap-2">
+                        <i data-lucide="code" class="text-cyan-400 w-5 h-5"></i> Languages & Logic
+                    </h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center gap-2 text-slate-300"><span class="text-cyan-400">▹</span> Python
+                        </li>
+                        <li class="flex items-center gap-2 text-slate-300"><span class="text-cyan-400">▹</span> SQL</li>
+                        <li class="flex items-center gap-2 text-slate-300"><span class="text-cyan-400">▹</span>
+                            Mathematical Analysis</li>
+                        <li class="flex items-center gap-2 text-slate-300"><span class="text-cyan-400">▹</span> Logic &
+                            Reasoning</li>
                     </ul>
                 </div>
-                <div class="card skill-card">
-                    <h3><i data-lucide="database"></i> Data & Databases</h3>
-                    <ul class="skill-list">
-                        <li>SQL</li>
-                        <li>Data Analysis</li>
-                        <li>Data Visualization</li>
+
+                <!-- Category 2: Data Libraries -->
+                <div class="glass-card p-6 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-lg font-bold text-slate-50 mb-4 flex items-center gap-2">
+                        <i data-lucide="database" class="text-cyan-400 w-5 h-5"></i> Data Libraries
+                    </h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center gap-2 text-slate-300"><span class="text-cyan-400">▹</span> Pandas
+                        </li>
+                        <li class="flex items-center gap-2 text-slate-300"><span class="text-cyan-400">▹</span> NumPy
+                        </li>
+                        <li class="flex items-center gap-2 text-slate-300"><span class="text-cyan-400">▹</span>
+                            Matplotlib</li>
+                        <li class="flex items-center gap-2 text-slate-300"><span class="text-cyan-400">▹</span>
+                            Scikit-Learn (Basic)</li>
                     </ul>
                 </div>
-                <div class="card skill-card">
-                    <h3><i data-lucide="code-2"></i> Development</h3>
-                    <ul class="skill-list">
-                        <li>Python</li>
-                        <li>React (Beginner)</li>
-                        <li>Web Development</li>
+
+                <!-- Category 3: Tools & Workflow -->
+                <div class="glass-card p-6 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-lg font-bold text-slate-50 mb-4 flex items-center gap-2">
+                        <i data-lucide="wrench" class="text-cyan-400 w-5 h-5"></i> Tools & Workflow
+                    </h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center gap-2 text-slate-300"><span class="text-cyan-400">▹</span> Git &
+                            GitHub</li>
+                        <li class="flex items-center gap-2 text-slate-300"><span class="text-cyan-400">▹</span> Jupyter
+                            Notebooks</li>
+                        <li class="flex items-center gap-2 text-slate-300"><span class="text-cyan-400">▹</span> Google
+                            Colab</li>
+                        <li class="flex items-center gap-2 text-slate-300"><span class="text-cyan-400">▹</span> VS Code
+                        </li>
                     </ul>
                 </div>
-                <div class="card skill-card">
-                    <h3><i data-lucide="lightbulb"></i> Problem Solving</h3>
-                    <ul class="skill-list">
-                        <li>Analytical Thinking</li>
-                        <li>Algorithm Design</li>
-                        <li>System Design</li>
+
+                <!-- Category 4: Professional Skills -->
+                <div class="glass-card p-6 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                    <h3 class="text-lg font-bold text-slate-50 mb-4 flex items-center gap-2">
+                        <i data-lucide="briefcase" class="text-cyan-400 w-5 h-5"></i> Professional Skills
+                    </h3>
+                    <ul class="space-y-2 text-sm">
+                        <li class="flex items-center gap-2 text-slate-300"><span class="text-cyan-400">▹</span> Problem
+                            Solving</li>
+                        <li class="flex items-center gap-2 text-slate-300"><span class="text-cyan-400">▹</span>
+                            Technical Documentation</li>
+                        <li class="flex items-center gap-2 text-slate-300"><span class="text-cyan-400">▹</span> Teaching
+                            & Explanation</li>
+                        <li class="flex items-center gap-2 text-slate-300"><span class="text-cyan-400">▹</span>
+                            Adaptability</li>
                     </ul>
                 </div>
             </div>
@@ -228,85 +419,107 @@
     </section>
 
     <!-- Projects -->
-    <section id="projects" class="section">
-        <div class="container">
-            <h2 class="section-title">Upcoming Projects</h2>
+    <section id="projects" class="py-24 bg-slate-900/30">
+        <div class="max-w-7xl mx-auto px-6">
+            <h2 class="text-4xl md:text-5xl font-bold text-center mb-16 text-gradient">Upcoming Projects</h2>
 
-            <div class="project-card">
-                <div class="project-header">
-                    <h3>Machine Learning Classification Model</h3>
-                    <a href="https://github.com/Peruks" target="_blank" class="btn btn-outline"
-                        style="padding: 0.5rem 1rem; font-size: 0.9rem;">View Code</a>
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+                <!-- Project 1 -->
+                <div class="glass-card p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-slate-50">ML Classification Model</h3>
+                        <a href="https://github.com/Peruks" target="_blank"
+                            class="text-xs border border-white/20 px-3 py-1 rounded hover:bg-cyan-400/10 hover:border-cyan-400 transition-colors">View
+                            Code</a>
+                    </div>
+                    <p class="text-slate-400 mb-6 text-sm leading-relaxed">
+                        Designing a classification model to predict outcomes using scikit-learn. Planning to implement
+                        data preprocessing, feature engineering, and model evaluation with cross-validation techniques.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="text-xs px-3 py-1 bg-cyan-400/10 text-cyan-400 rounded border border-cyan-400/20">Python</span>
+                        <span
+                            class="text-xs px-3 py-1 bg-cyan-400/10 text-cyan-400 rounded border border-cyan-400/20">ML</span>
+                        <span
+                            class="text-xs px-3 py-1 bg-cyan-400/10 text-cyan-400 rounded border border-cyan-400/20">scikit-learn</span>
+                    </div>
                 </div>
-                <p style="color: var(--text-secondary);">Built a classification model to predict outcomes using
-                    scikit-learn. Implemented data preprocessing, feature engineering, and model evaluation with
-                    cross-validation techniques.</p>
-                <div class="project-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Machine Learning</span>
-                    <span class="tag">scikit-learn</span>
-                    <span class="tag">Pandas</span>
+
+                <!-- Project 2 -->
+                <div class="glass-card p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-slate-50">Data Analytics Dashboard</h3>
+                        <a href="https://github.com/Peruks" target="_blank"
+                            class="text-xs border border-white/20 px-3 py-1 rounded hover:bg-cyan-400/10 hover:border-cyan-400 transition-colors">View
+                            Code</a>
+                    </div>
+                    <p class="text-slate-400 mb-6 text-sm leading-relaxed">
+                        Planning an interactive dashboard for data visualization. Aiming to enable users to explore
+                        datasets with dynamic charts and filtering capabilities using Python libraries.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="text-xs px-3 py-1 bg-cyan-400/10 text-cyan-400 rounded border border-cyan-400/20">Python</span>
+                        <span
+                            class="text-xs px-3 py-1 bg-cyan-400/10 text-cyan-400 rounded border border-cyan-400/20">Data
+                            Analysis</span>
+                        <span
+                            class="text-xs px-3 py-1 bg-cyan-400/10 text-cyan-400 rounded border border-cyan-400/20">Viz</span>
+                    </div>
+                </div>
+
+                <!-- Project 3 -->
+                <div class="glass-card p-8 rounded-xl hover:-translate-y-2 transition-transform duration-300">
+                    <div class="flex justify-between items-start mb-4">
+                        <h3 class="text-xl font-bold text-slate-50">SQL Data Pipeline</h3>
+                        <a href="https://github.com/Peruks" target="_blank"
+                            class="text-xs border border-white/20 px-3 py-1 rounded hover:bg-cyan-400/10 hover:border-cyan-400 transition-colors">View
+                            Code</a>
+                    </div>
+                    <p class="text-slate-400 mb-6 text-sm leading-relaxed">
+                        Developing a data processing pipeline to clean, transform, and analyze large datasets. Focusing
+                        on automating ETL processes for efficient data handling and reporting.
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                        <span
+                            class="text-xs px-3 py-1 bg-cyan-400/10 text-cyan-400 rounded border border-cyan-400/20">SQL</span>
+                        <span
+                            class="text-xs px-3 py-1 bg-cyan-400/10 text-cyan-400 rounded border border-cyan-400/20">ETL</span>
+                        <span
+                            class="text-xs px-3 py-1 bg-cyan-400/10 text-cyan-400 rounded border border-cyan-400/20">Python</span>
+                    </div>
                 </div>
             </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <h3>Data Analytics Dashboard</h3>
-                    <a href="https://github.com/Peruks" target="_blank" class="btn btn-outline"
-                        style="padding: 0.5rem 1rem; font-size: 0.9rem;">View Code</a>
-                </div>
-                <p style="color: var(--text-secondary);">Created an interactive dashboard for data visualization and
-                    analysis. Enables users to explore datasets with dynamic charts and filtering capabilities.</p>
-                <div class="project-tags">
-                    <span class="tag">Python</span>
-                    <span class="tag">Data Analysis</span>
-                    <span class="tag">Visualization</span>
-                    <span class="tag">SQL</span>
-                </div>
-            </div>
-
-            <div class="project-card">
-                <div class="project-header">
-                    <h3>SQL Data Processing Pipeline</h3>
-                    <a href="https://github.com/Peruks" target="_blank" class="btn btn-outline"
-                        style="padding: 0.5rem 1rem; font-size: 0.9rem;">View Code</a>
-                </div>
-                <p style="color: var(--text-secondary);">Developed a data processing pipeline to clean, transform, and
-                    analyze large datasets. Automated ETL processes for efficient data handling and reporting.</p>
-                <div class="project-tags">
-                    <span class="tag">SQL</span>
-                    <span class="tag">Data Processing</span>
-                    <span class="tag">Python</span>
-                    <span class="tag">ETL</span>
-                </div>
-            </div>
-
         </div>
     </section>
 
     <!-- Contact -->
-    <section id="contact" class="section">
-        <div class="container">
-            <h2 class="section-title">Get In Touch</h2>
-            <div class="contact-links">
-                <a href="mailto:ks.perarivalan@gmail.com" class="contact-item">
-                    <i data-lucide="mail"></i>
-                    <span>ks.perarivalan@gmail.com</span>
+    <section id="contact" class="py-24">
+        <div class="max-w-7xl mx-auto px-6 text-center">
+            <h2 class="text-4xl md:text-5xl font-bold mb-16 text-gradient">Get In Touch</h2>
+            <div class="flex flex-wrap justify-center gap-12">
+                <a href="mailto:ks.perarivalan@gmail.com"
+                    class="flex flex-col items-center gap-4 text-slate-400 hover:text-cyan-400 transition-colors group">
+                    <i data-lucide="mail" class="w-8 h-8 group-hover:scale-110 transition-transform"></i>
+                    <span class="text-lg">ks.perarivalan@gmail.com</span>
                 </a>
-                <a href="https://www.linkedin.com/in/perarivalanks" target="_blank" class="contact-item">
-                    <i data-lucide="linkedin"></i>
-                    <span>LinkedIn</span>
+                <a href="https://www.linkedin.com/in/perarivalanks" target="_blank"
+                    class="flex flex-col items-center gap-4 text-slate-400 hover:text-cyan-400 transition-colors group">
+                    <i data-lucide="linkedin" class="w-8 h-8 group-hover:scale-110 transition-transform"></i>
+                    <span class="text-lg">LinkedIn</span>
                 </a>
-                <a href="https://github.com/Peruks" target="_blank" class="contact-item">
-                    <i data-lucide="github"></i>
-                    <span>GitHub</span>
+                <a href="https://github.com/Peruks" target="_blank"
+                    class="flex flex-col items-center gap-4 text-slate-400 hover:text-cyan-400 transition-colors group">
+                    <i data-lucide="github" class="w-8 h-8 group-hover:scale-110 transition-transform"></i>
+                    <span class="text-lg">GitHub</span>
                 </a>
             </div>
         </div>
     </section>
 
-    <footer>
-        <div class="container">
+    <footer class="py-12 border-t border-white/10 bg-slate-900/50 text-center text-slate-500">
+        <div class="max-w-7xl mx-auto px-6">
             <p>&copy; 2025 Perarivalan K. All rights reserved.</p>
         </div>
     </footer>

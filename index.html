@@ -644,7 +644,22 @@
 
     <script src="script.js"></script>
     <script>
-        lucide.createIcons();
+        // Initialize Lucide icons
+        document.addEventListener('DOMContentLoaded', () => {
+             if (window.lucide) {
+                lucide.createIcons();
+             } else {
+                 // Fallback poll
+                 const checkLucide = setInterval(() => {
+                     if (window.lucide) {
+                         lucide.createIcons();
+                         clearInterval(checkLucide);
+                     }
+                 }, 100);
+                 // Stop polling after 3 seconds
+                 setTimeout(() => clearInterval(checkLucide), 3000);
+             }
+        });
     </script>
 </body>
 

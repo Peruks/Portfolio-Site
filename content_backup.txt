@@ -1,0 +1,57 @@
+HEADER:
+Name: Perarivalan K.
+Role: AI & Machine Learning Enthusiast
+Tagline: Transitioning into AI, Machine Learning, and Data Science with a focus on building practical solutions
+Location: Chennai, India
+Links: GitHub, LinkedIn, Resume
+
+ABOUT ME:
+I’m a disciplined and curious learner who believes in improving a little every day. My career path wasn’t linear, but every phase built a different strength that now gives me a unique edge in the tech field.
+My background has shaped a strong foundation:
+- TNPSC Preparation — built elite discipline, patience, deep focus, and the ability to learn for long hours without supervision.
+- UST Global — exposed me to corporate systems, networking fundamentals, troubleshooting, and operational responsibility.
+- Tech Exploration (AI, Data, Web3) — showed me that I thrive in hands-on technical environments and enjoy learning modern tools.
+Today, I’m not exploring different paths anymore — I have complete clarity.
+Data & AI is the field I want to grow in, and I’m fully committed to this direction.
+
+WHY DATA & AI?:
+I chose Data & AI because it aligns with who I am — logical, analytical, and focused on improvement. This field rewards skill over background and consistency over credentials. It combines everything I enjoy: finding patterns, analyzing information, solving problems, and learning continuously. It’s a career path where effort directly converts into growth, and that’s exactly what motivates me.
+
+VALUE PROPOSITION:
+1. Unwavering Clarity: I’m not testing the waters. I’ve made a mature, informed decision to build my career in this field and I am committed long-term.
+2. Proven Discipline: Years of 8–10 hours/day focused preparation taught me consistency, time management, and deep concentration.
+3. Technical Maturity: I already understand systems, networks, and troubleshooting from my corporate experience at UST Global — I am not starting from zero.
+4. Independent Learner: I know how to research, troubleshoot, understand documentation, and upgrade myself without constant hand-holding.
+5. The Hunger Factor: I’m restarting my career with a clear purpose. I have something to prove — and that drive shows in my effort, consistency, and mindset.
+Quote: “Fresh graduates bring energy. I bring energy + discipline + maturity + commitment.”
+
+HIGHLIGHTS:
+- Technical Foundation: Network Operations Engineer at UST Global with hands-on experience in system operations and technical problem-solving
+- Community Engagement: Active exploration of the Web3 ecosystem and engagement with tech communities, staying current with emerging technologies
+- Disciplined Learning: Developed strong analytical thinking and consistency through focused preparation, now applying these skills to AI and ML
+- Current Focus: Building practical projects in AI and Machine Learning while continuously improving technical communication skills
+
+SKILLS:
+- AI & Machine Learning: Machine Learning, Deep Learning (Beginner), Data Analysis, Python
+- Data & Databases: SQL, Data Analysis, Data Visualization
+- Development: Python, React (Beginner), Web Development
+- Problem Solving: Analytical Thinking, Algorithm Design, System Design
+- Technical Skills: Network Operations, System Administration, Troubleshooting
+- Soft Skills: Communication, Team Collaboration, Continuous Learning
+
+UPCOMING PROJECTS:
+1. Machine Learning Classification Model
+   - Built a classification model to predict outcomes using scikit-learn. Implemented data preprocessing, feature engineering, and model evaluation with cross-validation techniques.
+   - Tags: Python, Machine Learning, scikit-learn, Pandas
+2. Data Analytics Dashboard
+   - Created an interactive dashboard for data visualization and analysis. Enables users to explore datasets with dynamic charts and filtering capabilities.
+   - Tags: Python, Data Analysis, Visualization, SQL
+3. SQL Data Processing Pipeline
+   - Developed a data processing pipeline to clean, transform, and analyze large datasets. Automated ETL processes for efficient data handling and reporting.
+   - Tags: SQL, Data Processing, Python, ETL
+
+CONTACT:
+Email: ks.perarivalan@gmail.com
+LinkedIn: https://www.linkedin.com/in/perarivalanks
+GitHub: https://github.com/Peruks
+Resume: resume.pdf

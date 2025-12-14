@@ -26,59 +26,86 @@ window.addEventListener('mouseout', () => {
     mouse.y = null;
 });
 
-// Particle Class
+// Particle Class (Math & Code Symbols)
+const symbols = ['Σ', 'λ', '∫', '≠', '∞', 'π', 'θ', '√', '{ }', '</>', '[]', 'f(x)', '∇', '∃', '∀'];
+
 class Particle {
     constructor() {
         this.x = Math.random() * width;
         this.y = Math.random() * height;
-        this.vx = (Math.random() - 0.5) * 0.8; // Slightly faster
-        this.vy = (Math.random() - 0.5) * 0.8;
-        this.size = Math.random() * 2 + 1;
+        this.velocity = Math.random() * 0.5 + 0.1; // Slow upward float
+        this.size = Math.floor(Math.random() * 20) + 14; // Font size 14-34px
+        this.symbol = symbols[Math.floor(Math.random() * symbols.length)];
         this.baseX = this.x;
         this.baseY = this.y;
-        this.density = (Math.random() * 30) + 1;
+        this.opacity = 0; // Start invisible
+        this.fadeSpeed = Math.random() * 0.01 + 0.005;
+        this.fadingIn = true;
+        this.color = Math.random() > 0.5 ? '#FACC15' : '#3B82F6'; // Gold or Blue
     }
 
     update() {
-        // Mouse Interaction (Repulsion)
+        // Mouse Interaction (Subtle disturbance)
         if (mouse.x != null) {
             let dx = mouse.x - this.x;
             let dy = mouse.y - this.y;
             let distance = Math.sqrt(dx * dx + dy * dy);
-            let forceDirectionX = dx / distance;
-            let forceDirectionY = dy / distance;
-            let maxDistance = mouse.radius;
-            let force = (maxDistance - distance) / maxDistance;
-            let directionX = forceDirectionX * force * this.density;
-            let directionY = forceDirectionY * force * this.density;
-
             if (distance < mouse.radius) {
-                this.x -= directionX;
-                this.y -= directionY;
+                const force = (mouse.radius - distance) / mouse.radius;
+                const angle = Math.atan2(dy, dx);
+                this.x -= Math.cos(angle) * force * 2;
+                this.y -= Math.sin(angle) * force * 2;
             }
         }
 
-        // Normal Movement
-        this.x += this.vx;
-        this.y += this.vy;
+        // Floating Movement
+        this.y -= this.velocity;
+        this.x += Math.sin(this.y * 0.01) * 0.5; // Slight wave
 
-        // Bounce off edges
-        if (this.x < 0 || this.x > width) this.vx *= -1;
-        if (this.y < 0 || this.y > height) this.vy *= -1;
+        // Reset if off screen
+        if (this.y < -50) {
+            this.y = height + 50;
+            this.x = Math.random() * width;
+            this.opacity = 0;
+            this.fadingIn = true;
+        }
+
+        // Fade In / Fade Out Logic
+        if (this.fadingIn) {
+            this.opacity += this.fadeSpeed;
+            if (this.opacity >= 0.6) { // Max opacity
+                this.opacity = 0.6;
+                this.fadingIn = false;
+            }
+        } else {
+            this.opacity -= this.fadeSpeed * 0.5; // Fade out slower
+            if (this.opacity <= 0) {
+                this.opacity = 0;
+                this.fadingIn = true;
+                this.y = height + 50; // Reset position
+                this.x = Math.random() * width;
+            }
+        }
     }
 
     draw() {
-        ctx.fillStyle = 'rgba(34, 211, 238, 0.7)'; // Cyan
-        ctx.beginPath();
-        ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
-        ctx.fill();
+        ctx.font = `${this.size}px 'Courier New', monospace`; // Monospace for code look
+        ctx.fillStyle = this.color;
+
+        // Optional Blur Effect for "dreamy" look
+        // ctx.filter = 'blur(1px)'; 
+
+        ctx.globalAlpha = this.opacity;
+        ctx.fillText(this.symbol, this.x, this.y);
+        ctx.globalAlpha = 1.0; // Reset
+        ctx.filter = 'none';
     }
 }
 
 // Initialize Particles
 function initParticles() {
     particles = [];
-    const particleCount = Math.floor(width / 10); // Higher density
+    const particleCount = Math.floor(width / 20); // Lower density for cleaner look
     for (let i = 0; i < particleCount; i++) {
         particles.push(new Particle());
     }
@@ -92,24 +119,7 @@ function animate() {
     for (let i = 0; i < particles.length; i++) {
         particles[i].update();
         particles[i].draw();
-
-        // Connect Particles
-        for (let j = i; j < particles.length; j++) {
-            const dx = particles[i].x - particles[j].x;
-            const dy = particles[i].y - particles[j].y;
-            const distance = Math.sqrt(dx * dx + dy * dy);
-
-            if (distance < 120) {
-                ctx.beginPath();
-                // Dynamic opacity based on distance
-                let opacity = 1 - (distance / 120);
-                ctx.strokeStyle = `rgba(167, 139, 250, ${opacity * 0.4})`; // Violet connections
-                ctx.lineWidth = 0.8;
-                ctx.moveTo(particles[i].x, particles[i].y);
-                ctx.lineTo(particles[j].x, particles[j].y);
-                ctx.stroke();
-            }
-        }
+        // No connections - purely symbols floating
     }
 
     requestAnimationFrame(animate);
